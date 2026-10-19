@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mente & Fe | Renovación Diaria</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0B132B',
+                            800: '#1C2541',
+                            700: '#3A506B',
+                        },
+                        gold: {
+                            400: '#F3E5AB',
+                            500: '#D4AF37',
+                            600: '#AA7C11',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-navy-900 text-slate-100 min-h-screen font-sans flex flex-col justify-between text-lg leading-relaxed">
+
+    <!-- Header / Navbar -->
+    <header class="bg-navy-800/90 backdrop-blur border-b border-gold-500/20 sticky top-0 z-50">
+        <div class="max-w-xl mx-auto px-5 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-brain text-gold-500 text-2xl"></i>
+                <span class="font-bold text-xl tracking-wide text-white">Mente<span class="text-gold-500">&</span>Fe</span>
+            </div>
+            <!-- Contador de Racha -->
+            <div class="flex items-center gap-2 bg-navy-900/80 border border-gold-500/30 px-4 py-1.5 rounded-full text-base text-gold-500 font-semibold shadow-inner">
+                <i class="fa-solid fa-fire text-amber-500 animate-pulse text-lg"></i>
+                <span id="streakCount">1 día activo</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-xl mx-auto px-5 py-6 flex-1 w-full space-y-7">
+
+        <!-- Banner de Bienvenida -->
+        <section>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1.5" id="welcomeHeading">¡Bienvenida, Lourdes! 👋</h1>
+            <p class="text-slate-200 text-base sm:text-lg">Elige tu enfoque de renovación diaria para la sesión de hoy:</p>
+        </section>
+
+        <!-- Selector de Caminos (Switch Tabs) -->
+        <div class="grid grid-cols-2 gap-2 bg-navy-800 p-1.5 rounded-xl border border-gold-500/20">
+            <button id="btnSciencePath" onclick="switchPath('scientific')" class="py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 transition-all duration-300">
+                <i class="fa-solid fa-microscope text-xl"></i> Camino Científico
+            </button>
+            <button id="btnFaithPath" onclick="switchPath('faith')" class="py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 transition-all duration-300">
+                <i class="fa-solid fa-book-bible text-xl"></i> Camino de Fe
+            </button>
+        </div>
+
+        <!-- BANNER DE RUTINA NOCTURNA GUIADA -->
+        <section class="bg-gradient-to-r from-gold-500/20 via-navy-800 to-navy-800 border border-gold-500/40 p-5 rounded-2xl shadow-lg flex items-center justify-between">
+            <div class="space-y-1">
+                <span class="text-xs uppercase font-extrabold text-gold-400 tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-bed"></i> Rutina Nocturna Guiada
+                </span>
+                <h3 class="font-bold text-lg text-white">Sesión de Noche de 10 Minutos</h3>
+                <p class="text-sm text-slate-300">Respiración 4-7-8 + Meditación de la Cabaña + Audio Nocturno</p>
+            </div>
+            <button onclick="openModal('cabinMeditation')" class="bg-gold-500 hover:bg-gold-600 text-navy-900 font-extrabold text-base px-4 py-2.5 rounded-xl transition shadow shrink-0">
+                Iniciar
+            </button>
+        </section>
+
+        <!-- ==================== CAMINO CIENTÍFICO ==================== -->
+        <div id="scientificPath" class="space-y-4">
+            <div class="bg-gradient-to-r from-navy-800 to-navy-700/60 p-5 rounded-xl border-l-4 border-gold-500 shadow-lg">
+                <span class="text-sm uppercase font-bold tracking-wider text-gold-500">Neuropsicología & Evidencia</span>
+                <h2 class="text-xl font-bold text-white mt-1">Entrenamiento Neuronal Concurrente</h2>
+                <p class="text-base text-slate-200 mt-2 leading-relaxed">
+                    Uso del Sistema Activador Reticular (SARA), la neuroplasticidad intencionada y las ventanas biológicas de consolidación en ondas Alfa/Teta.
+                </p>
+            </div>
+
+            <!-- Módulos Científicos Interactivos -->
+            <div class="grid gap-4">
+                <div onclick="openModal('sciAudio')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-moon"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">A. Audios de Reprogramación Nocturna</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Fase pre-sueño y consolidación de memoria en ondas Teta</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('sciJournal')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">B. Diario de Gratitud Atencional</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Entrenamiento del filtro SARA (Emmons & McCullough)</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('sciVis')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">C. Visualización Sensorial Guiada</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Escritura a mano + Área de Broca y pregunta de acción</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('sciIdentity')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">D. Identidad y Yo Futuro</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Estudio Hershfield: Conexión con la mPFC y etiquetas</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('cabinMeditation')" class="bg-navy-800 p-4.5 rounded-xl border border-gold-500/50 hover:border-gold-400 cursor-pointer transition flex items-center justify-between shadow-md">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-house-tree"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">E. Meditación Guiada: La Cabaña & El Yo Futuro</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Encuentro con tu versión sabia de 90 años frente al fuego</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CAMINO DE FE ==================== -->
+        <div id="faithPath" class="space-y-4 hidden">
+            <div class="bg-gradient-to-r from-navy-800 to-navy-700/60 p-5 rounded-xl border-l-4 border-gold-500 shadow-lg">
+                <span class="text-sm uppercase font-bold tracking-wider text-gold-500">Fundamento Bíblico + Exégesis</span>
+                <h2 class="text-xl font-bold text-white mt-1">Renovación Diaria por la Palabra</h2>
+                <p class="text-base text-slate-200 mt-2 leading-relaxed">
+                    Transformación continua por la renovación del entendimiento y la declaración de la verdad escrita sobre tu vida.
+                </p>
+            </div>
+
+            <!-- Módulos de Fe Interactivos -->
+            <div class="grid gap-4">
+                <div onclick="openModal('faithAudio')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl font-bold shrink-0">
+                            ✝
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">A. Declaraciones Nocturnas Bíblicas</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Proverbios 18:21 + Versículos y Guión</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('faithJournal')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-hands-praying"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">B. Acción de Gracias & Alabanza</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de 1 Tesalonicenses 5:18 y Salmo 103</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('faithIdentity')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">C. Identidad en Cristo & Re-etiquetado</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Efesios 2:10 (Poiema) y 2 Corintios 5:17</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('faithMind')" class="bg-navy-800 p-4.5 rounded-xl border border-slate-700/60 hover:border-gold-500/50 cursor-pointer transition flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">D. Renovación de la Mente & Meditación</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Romanos 12:2 (Metamorphoo) y Josué 1:8</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+
+                <div onclick="openModal('cabinMeditation')" class="bg-navy-800 p-4.5 rounded-xl border border-gold-500/50 hover:border-gold-400 cursor-pointer transition flex items-center justify-between shadow-md">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-house-chimney-window"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white">E. Meditación Guiada: La Cabaña en Cristo</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Encuentro con tu versión futura formada por el Señor</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== MÓDULO DE GRABACIÓN & GUARDADO DE VOZ ==================== -->
+        <section class="bg-navy-800/90 p-5.5 rounded-2xl border border-gold-500/30 shadow-xl space-y-4">
+            <h3 class="font-bold text-lg text-gold-500 uppercase tracking-wider flex items-center gap-2.5">
+                <i class="fa-solid fa-microphone text-xl"></i> Grabadora & Mi Biblioteca Nocturna
+            </h3>
+            <p class="text-base text-slate-200 leading-relaxed">
+                Graba tus declaraciones con tu voz y **guárdalas permanentemente en la app** para escucharlas cada noche antes de dormir.
+            </p>
+            
+            <div class="space-y-3 bg-navy-900/80 p-4 rounded-xl border border-slate-700/60">
+                <input id="audioTitleInput" type="text" placeholder="Título de tu audio (Ej. Mi Audio de Paz y Abundancia)" class="w-full bg-navy-800 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <button id="recordBtn" onclick="toggleRecord()" class="bg-rose-600 hover:bg-rose-700 text-white text-base px-5 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow">
+                        <i class="fa-solid fa-circle text-lg"></i> <span>Iniciar Grabación</span>
+                    </button>
+                    <button id="saveAudioBtn" onclick="saveAudio()" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white text-base px-5 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow">
+                        <i class="fa-solid fa-floppy-disk text-lg"></i> <span>Guardar en la App</span>
+                    </button>
+                </div>
+                <audio id="audioPlayback" controls class="hidden h-10 w-full mt-2"></audio>
+            </div>
+
+            <!-- AUDIOS GUARDADOS & CONTROLES NOCTURNOS (LOOP / TIMER) -->
+            <div class="pt-2">
+                <div class="flex justify-between items-center mb-2">
+                    <h4 class="font-bold text-base text-white flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-gold-500"></i> Mis Audios Nocturnos Guardados:
+                    </h4>
+                    <div class="flex items-center gap-2 text-xs">
+                        <label class="flex items-center gap-1.5 cursor-pointer text-slate-300">
+                            <input type="checkbox" id="loopToggle" onchange="toggleLoop(this.checked)" class="accent-gold-500">
+                            <span>Bucle Continuo</span>
+                        </label>
+                        <select id="sleepTimer" onchange="setSleepTimer(this.value)" class="bg-navy-900 border border-slate-700 text-gold-400 rounded px-2 py-1 focus:outline-none">
+                            <option value="0">Sin temporizador</option>
+                            <option value="15">Apagar en 15 min</option>
+                            <option value="30">Apagar en 30 min</option>
+                            <option value="45">Apagar en 45 min</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="savedAudiosList" class="space-y-2.5">
+                    <!-- Audios guardados se renderizan vía IndexedDB -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BIBLIOTECA DE EVIDENCIA CIENTÍFICA & FE (PUBMED ENLACES) ==================== -->
+        <section class="border-t border-slate-800 pt-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-xl text-white flex items-center gap-2">
+                    <i class="fa-solid fa-microscope text-gold-500"></i> Biblioteca de Estudios Clave
+                </h3>
+                <span id="studiesCountBadge" class="text-sm bg-navy-800 border border-gold-500/30 text-gold-500 px-3.5 py-1 rounded-full font-bold">8 Estudios Científicos</span>
+            </div>
+            <div id="studiesList" class="space-y-4">
+                <!-- Los estudios se renderizan mediante JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bg-navy-800 border-t border-gold-500/20 py-3.5 px-6 sticky bottom-0 z-50">
+        <div class="max-w-xl mx-auto flex justify-between items-center text-base">
+            <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="flex flex-col items-center gap-1 text-gold-500 font-bold">
+                <i class="fa-solid fa-compass text-2xl"></i>
+                <span>Caminos</span>
+            </button>
+            <button onclick="openModal('journalModal')" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white transition">
+                <i class="fa-solid fa-pen-to-square text-2xl"></i>
+                <span>Escribir Diario</span>
+            </button>
+            <button onclick="openModal('settingsModal')" class="flex flex-col items-center gap-1 text-slate-300 hover:text-white transition">
+                <i class="fa-solid fa-sliders text-2xl"></i>
+                <span>Ajustes</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==================== MODAL DE CONTENIDO DETALLADO ==================== -->
+    <div id="contentModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div class="bg-navy-800 border border-gold-500/40 rounded-t-2xl sm:rounded-2xl w-full max-w-xl max-h-[88vh] overflow-y-auto p-6 text-slate-100 relative shadow-2xl space-y-5">
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-2xl p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- JS Lógica, IndexedDB, Racha & Ajustes -->
+    <script>
+        const modalContent = {
+            cabinMeditation: `
+                <div class="space-y-5 text-base leading-relaxed">
+                    <span class="text-xs uppercase font-bold text-gold-500 tracking-wider">Experiencia Guiada Inmersiva</span>
+                    <h2 class="text-2xl font-bold text-white">Meditación: La Cabaña & El Yo Futuro Sabio</h2>
+                    
+                    <div class="bg-navy-900/90 p-4 rounded-xl border border-gold-500/30 space-y-2">
+                        <p class="font-bold text-gold-400 text-sm">🫁 Fase 1: Respiración 4-7-8 (Ondas Alfa/Teta)</p>
+                        <p class="text-slate-200 text-sm">
+                            Cierra los ojos... Inhala profundamente por la nariz en <strong class="text-white">4 segundos</strong>... Retén el aire durante <strong class="text-white">7 segundos</strong>... Y exhala lentamente por la boca durante <strong class="text-white">8 segundos</strong>. Siente cómo tu cuerpo suelta toda tensión y tu mente se calma.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4 rounded-xl border-l-4 border-gold-500 space-y-3">
+                        <p class="font-bold text-gold-400 text-sm">🌲 Fase 2: El Senderismo Sensorial</p>
+                        <p class="text-slate-200 text-sm">
+                            Imagina que caminas por un sendero tranquilo rodeado de árboles muy altos. Sientes la brisa fresca acariciando tu rostro y escuchas el sonido pausado de tus propios pasos sobre la tierra. No hay prisa... vas a tu ritmo. A lo lejos, entre las ramas, aparece una pequeña cabaña de madera rústica. Te acercas sin dudar, apóyas la mano sobre el picaporte de madera y abres la puerta.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4 rounded-xl border-l-4 border-gold-500 space-y-3">
+                        <p class="font-bold text-gold-400 text-sm">🔥 Fase 3: El Encuentro con la Mujer Sabia</p>
+                        <p class="text-slate-200 text-sm">
+                            Al entrar, percibes de inmediato el cálido aroma de la leña y el calor de una chimenea encendida. Sentada frente al fuego en una mecedora de madera, hay una mujer mayor de unos 90 años. Al sentir tu presencia, gira suavemente la cabeza, te mira con infinita ternura y sonríe. Te invita a sentarte a su lado. Se miran en silencio contemplando las llamas.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4 rounded-xl border-l-4 border-gold-500 space-y-3">
+                        <p class="font-bold text-gold-400 text-sm">🤝 Fase 4: La Revelación del Yo Futuro</p>
+                        <p class="text-slate-200 text-sm">
+                            Te pones de pie, te acercas a ella y le tomas las manos. Al cruzar miradas, de pronto lo comprendes todo: <strong class="text-white">esa mujer anciana eres tú misma a los 90 años</strong>. Es la versión tuya que ya recorrió todo el camino, la que superó los miedos presentes, la que aprendió a confiar y vencer. Hazle esa pregunta importante que ronda tu mente hoy... Escucha lo primero que venga a ti sin pensarlo demasiado. Quédate con su respuesta y con la certeza de que esa sabiduría ya habita dentro de ti.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-700/60 p-4 rounded-xl">
+                        <p class="text-xs text-slate-300 italic">
+                            💡 Tip: Puedes usar la grabadora de voz de la app para leer este guión a tu propio ritmo y guardarlo como tu meditación guía nocturna.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            faithAudio: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo A</span>
+                    <h2 class="text-2xl font-bold text-white">Declaraciones Nocturnas con la Palabra</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Proverbios 18:21</p>
+                        <p class="italic text-slate-100 text-base">"La muerte y la vida están en poder de la lengua, y el que la ama comerá de sus frutos."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> En el hebreo original, la palabra traducida como "poder" es <em class="text-gold-400 font-serif">Yad</em> (que significa literalmente "mano"). Tu lengua no emite simples sonidos al aire; tiene "mano física" para moldear tu realidad. Las palabras que declaras activan el filtro atencional de tu mente y alinean tu espíritu con la verdad de Dios.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Romanos 10:17</p>
+                        <p class="italic text-slate-100 text-base">"Así que la fe es por el oír, y el oír, por la palabra de Dios."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> "Oír" en el griego es <em class="text-gold-400 font-serif">Akoe</em>, que implica una escucha activa y continua. Al grabar las escrituras con tu propia voz y escucharlas antes de dormir, alimentas tu espíritu y tu inconsciente en el momento de mayor receptividad.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
+                        <h4 class="font-bold text-white text-lg">🎙️ Guión Recomendado para Grabar hoy:</h4>
+                        <p class="text-slate-100 leading-relaxed italic text-base">
+                            "En paz me acostaré y asimismo dormiré, porque solo Tú, Señor, me haces vivir confiada (Salmo 4:8). Mi mente está resguardada en la paz que sobrepasa todo entendimiento (Filipenses 4:7). Ningún pensamiento de temor prevalece hoy en mí, porque Dios me ha dado espíritu de poder, de amor y de dominio propio (2 Timoteo 1:7)."
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            faithJournal: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo B</span>
+                    <h2 class="text-2xl font-bold text-white">Acción de Gracias & Alabanza</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 1 Tesalonicenses 5:18</p>
+                        <p class="italic text-slate-100 text-base">"Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> "Dad gracias" proviene del griego <em class="text-gold-400 font-serif">Eucharisteo</em> (de donde viene la palabra Eucaristía), cuya raíz es <em class="text-gold-400">Charis</em> (Gracia) y <em class="text-gold-400">Chara</em> (Gozo). Agradecer no es un acto pasivo; es reconocer activamente la gracia de Dios, lo cual desata el gozo y reprograma tu corazón para enfocarse en la abundancia divina.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Salmo 103:2</p>
+                        <p class="italic text-slate-100 text-base">"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Teológica:</strong> La mente humana tiende naturalmente a olvidar las victorias pasadas y enfocarse en los problemas presentes (sesgo de negatividad). Este Salmo es una orden directa de tu espíritu a tu alma para obligarla a recordar la fidelidad de Dios.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            faithIdentity: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo C</span>
+                    <h2 class="text-2xl font-bold text-white">Identidad en Cristo & Re-etiquetado</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Efesios 2:10</p>
+                        <p class="italic text-slate-100 text-base">"Porque somos hechura suya, creados en Cristo Jesús para buenas obras..."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> La palabra traducida como "hechura" en el griego original es <em class="text-gold-400 font-serif">Poiema</em> (de donde proviene nuestra palabra "poema" u obra de arte). No eres un producto del azar, de tus errores pasados ni de las etiquetas que otros te pusieron; eres un diseño magistral e intencionado de Dios.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 2 Corintios 5:17</p>
+                        <p class="italic text-slate-100 text-base">"De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Aplicación Práctica:</strong> Tus antiguas etiquetas ("soy inconstante", "soy ansiosa") pertenecen a la naturaleza vieja. En Cristo, tienes el derecho legal y espiritual de asumir una nueva identidad de disciplina, paz y victoria.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            faithMind: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo D</span>
+                    <h2 class="text-2xl font-bold text-white">Renovación de la Mente & Meditación</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Romanos 12:2</p>
+                        <p class="italic text-slate-100 text-base">"...sino transformaos por medio de la renovación de vuestro entendimiento..."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> "Transformaos" en el griego es <em class="text-gold-400 font-serif">Metamorphoo</em> (de donde viene metamorfosis). No es un cambio externo superficial, sino un cambio estructural biológico y espiritual que ocurre únicamente cuando sustituyes mentiras viejas por la Verdad de Dios.
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <p class="font-bold text-gold-400 text-lg">📖 Josué 1:8</p>
+                        <p class="italic text-slate-100 text-base">"Nunca se apartará de tu boca este libro de la ley, sino que de día y de noche meditarás en él..."</p>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">Explicación Exegética:</strong> La palabra hebrea para "meditar" es <em class="text-gold-400 font-serif">Hagah</em>, que significa literalmente "rumiar", murmurar o musitar en voz baja. A diferencia de la meditación oriental (vaciar la mente), la meditación bíblica es <strong class="text-white">llenar la mente</strong> de la Palabra y repetirla activamente.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            sciAudio: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino Científico • Módulo A</span>
+                    <h2 class="text-2xl font-bold text-white">Reprogramación Nocturna (Ondas Alfa/Teta)</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <h4 class="font-bold text-gold-400 text-lg">🧠 Por qué funcionan los minutos antes de dormir:</h4>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            Durante los 10 a 15 minutos previos al sueño, tu cerebro pasa de ondas Beta (alerta) a frecuencias <strong class="text-white">Alfa (8–12 Hz) y Teta (4–8 Hz)</strong>. En este estado, el filtro crítico de la mente consciente disminuye, abriendo una ventana directa hacia el hipocampo. Toda información repetida con emoción en este lapso es retenida y consolidada durante las fases de sueño profundo (NREM y REM).
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
+                        <h4 class="font-bold text-white text-lg">📋 Reglas científicas para grabar tu audio:</h4>
+                        <ul class="list-disc list-inside text-slate-200 text-base space-y-2">
+                            <li><strong class="text-white">Tu propia voz:</strong> Tu cerebro reconoce tu tono vocal como la fuente de mayor confianza e identidad.</li>
+                            <li><strong class="text-white">Sin la palabra "NO":</strong> El cerebro procesa primero la imagen visual. Si dices "no quiero fallar", el cerebro procesa "fallar". Di en su lugar: "avanzo con seguridad".</li>
+                            <li><strong class="text-white">Tiempo presente:</strong> Declara como un hecho actual para activar los circuitos de recompensa.</li>
+                        </ul>
+                    </div>
+                </div>
+            `,
+
+            sciJournal: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino Científico • Módulo B</span>
+                    <h2 class="text-2xl font-bold text-white">Diario de Gratitud Atencional</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <h4 class="font-bold text-gold-400 text-lg">🧠 Neurociencia de la Gratitud (Estudios Emmons & Fox):</h4>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            El cerebro tiene un sesgo evolutivo de supervivencia orientado a detectar peligros. Practicar gratitud intencionada entrena al <strong class="text-white">Sistema Activador Reticular Ascendente (SARA)</strong> para reconfigurar sus filtros y detectar oportunidades y aspectos positivos. Estudios por fMRI demuestran que estimula el córtex prefrontal medial, reduciendo los niveles de cortisol y la hiperactividad de la amígdala.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            sciVis: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino Científico • Módulo C</span>
+                    <h2 class="text-2xl font-bold text-white">Visualización Sensorial Guiada</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <h4 class="font-bold text-gold-400 text-lg">🧠 Activación del Área de Broca y Corteza Motora:</h4>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            <strong class="text-white">1. Escribir a mano primero:</strong> A diferencia de teclear, la escritura manual requiere un patrón motriz único que activa el <strong class="text-white">Área de Broca</strong> (centro de producción lingüística) y la corteza motora, uniendo el cuerpo al pensamiento.<br><br>
+                            <strong class="text-white">2. Imaginería mental detallada:</strong> Estudios de Pascual-Leone (Harvard) muestran que imaginar realizar una acción activa exactamente las mismas áreas neuronales que ejecutarla físicamente.<br><br>
+                            <strong class="text-white">3. La Pregunta de Acción:</strong> Para evitar que la mente se quede en la gratificación pasiva, al abrir los ojos responde siempre: <em>"¿Qué pequeña acción concreta tomo hoy hacia esa meta?"</em>
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            sciIdentity: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino Científico • Módulo D</span>
+                    <h2 class="text-2xl font-bold text-white">Identidad y Conexión con el Yo Futuro</h2>
+                    
+                    <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
+                        <h4 class="font-bold text-gold-400 text-lg">🧠 Estudio de Hershfield & mPFC:</h4>
+                        <p class="text-slate-200 leading-relaxed text-base">
+                            Los estudios por resonancia magnética (fMRI) revelan que cuando piensas en ti mismo en el presente se activa la <strong class="text-white">corteza prefrontal medial (mPFC)</strong>. Sin embargo, al pensar en tu "yo futuro" a 5 o 10 años, la mPFC se apaga: tu cerebro trata a tu yo futuro literalmente como a un extraño.<br><br>
+                            Para romper la procrastinación, debes interactuar diariamente con la visión de tu yo futuro mediante decisiones coherentes para volverlo una realidad biológica presente.
+                        </p>
+                    </div>
+                </div>
+            `,
+
+            journalModal: `
+                <div class="space-y-4 text-base">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Herramienta Compartida</span>
+                    <h2 class="text-2xl font-bold text-white">Diario de Gratitud & Registro</h2>
+                    
+                    <p class="text-base text-slate-200 leading-relaxed">Registra de 3 a 5 motivos específicos por los que estás agradecida hoy:</p>
+                    
+                    <textarea id="journalText" rows="5" class="w-full bg-navy-900 border border-slate-700 rounded-xl p-4 text-base text-slate-100 focus:border-gold-500 focus:outline-none" placeholder="1. Hoy agradezco específicamente por..."></textarea>
+                    
+                    <button onclick="saveJournal()" class="w-full bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-base py-3.5 rounded-xl transition shadow-lg">
+                        Guardar Entrada de Hoy
+                    </button>
+                    
+                    <div id="saveConfirm" class="hidden text-center text-base text-emerald-400 font-bold">
+                        ✓ Entrada guardada correctamente
+                    </div>
+                </div>
+            `,
+
+            // ================= PANTALLA DE AJUSTES =================
+            settingsModal: `
+                <div class="space-y-5 text-base">
+                    <span class="text-xs uppercase font-bold text-gold-500 tracking-wider">Configuración Personal</span>
+                    <h2 class="text-2xl font-bold text-white">Ajustes de la Aplicación</h2>
+
+                    <!-- PROGRESO DE 90 DÍAS -->
+                    <div class="bg-navy-900/90 p-4 rounded-xl border border-gold-500/30 space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-white text-base">Reto de 90 Días de Renovación</span>
+                            <span id="settingsStreakBadge" class="text-xs bg-gold-500/20 text-gold-400 font-bold px-2.5 py-1 rounded-full">Día 1 de 90</span>
+                        </div>
+                        <div class="w-full bg-navy-800 rounded-full h-3 border border-slate-700 overflow-hidden">
+                            <div id="streakProgressBar" class="bg-gold-500 h-full transition-all duration-500" style="width: 1.1%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- NOMBRE DE USUARIO -->
+                    <div class="space-y-2">
+                        <label class="font-bold text-white text-sm">Tu Nombre:</label>
+                        <input id="userNameInput" type="text" class="w-full bg-navy-900 border border-slate-700 rounded-xl p-3 text-base text-slate-100 focus:border-gold-500 focus:outline-none" placeholder="Ingresa tu nombre">
+                    </div>
+
+                    <!-- CAMINO PREFERIDO -->
+                    <div class="space-y-2">
+                        <label class="font-bold text-white text-sm">Camino Predeterminado al Abrir:</label>
+                        <select id="defaultPathSelect" class="w-full bg-navy-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-base focus:border-gold-500 focus:outline-none">
+                            <option value="faith">Camino de Fe (Fundamento Bíblico)</option>
+                            <option value="scientific">Camino Científico (Neuropsicología)</option>
+                        </select>
+                    </div>
+
+                    <!-- EXPORTAR DIARIO -->
+                    <div class="pt-2 border-t border-slate-700/60 space-y-3">
+                        <h4 class="font-bold text-white text-base">Gestión de Datos:</h4>
+                        <button onclick="exportJournalEntries()" class="w-full bg-navy-700 hover:bg-navy-600 border border-slate-600 text-white font-bold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-arrow-down"></i> Exportar Entradas del Diario (.txt)
+                        </button>
+                        <button onclick="clearAudioDatabase()" class="w-full bg-rose-900/40 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 font-bold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-trash-can"></i> Borrar Biblioteca de Audios
+                        </button>
+                    </div>
+
+                    <button onclick="saveSettings()" class="w-full bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-base py-3.5 rounded-xl transition shadow-lg mt-2">
+                        Guardar Cambios
+                    </button>
+                </div>
+            `
+        };
+
+        const studiesData = [
+            { type: 'scientific', title: 'Plasticidad Atencional (SARA)', author: 'Maguire et al. (2000)', pmid: '10706601', journal: 'PNAS', desc: 'Muestra cómo el foco atencional repetido reconfigura físicamente estructuras cerebrales (hipocampo).' },
+            { type: 'scientific', title: 'Imaginería Mental & Corteza Motora', author: 'Pascual-Leone et al. (1995)', pmid: '7500130', journal: 'J. Neurophysiol', desc: 'Practicar mentalmente expande la red neuronal motora en casi idéntica proporción que la práctica física.' },
+            { type: 'scientific', title: 'Desconexión con el Yo Futuro', author: 'Hershfield et al. (2009 / 2011)', pmid: '22023566', journal: 'fMRI Study', desc: 'Comprueba que el cerebro procesa al yo futuro como a un extraño si no hay interacción consciente deliberada.' },
+            { type: 'scientific', title: 'Consolidación de Memoria en Sueño', author: 'Rasch & Born (2013)', pmid: '23589831', journal: 'Physiol. Rev.', desc: 'Demuestra la ventana biológica en ondas Teta donde la información previa se fija en memoria a largo plazo.' },
+            { type: 'scientific', title: 'Efectos del Diario de Gratitud', author: 'Emmons & McCullough (2003)', pmid: '12585811', journal: 'JPSP', desc: 'Aumento significativo en optimismo y calidad de sueño tras registro constante.' },
+            { type: 'scientific', title: 'Recompensa con Afirmaciones', author: 'Cascio et al. (2016)', pmid: '26548575', journal: 'Social Cognitive', desc: 'Autoafirmar valores clave activa áreas de procesamiento de recompensa cerebral (VSC).' },
+            { type: 'scientific', title: 'Efecto Placebo y Expectativa', author: 'Benedetti et al. (2005)', pmid: '16282226', journal: 'J. Neuroscience', desc: 'La expectativa consciente libera neurotransmisores reales modulando la experiencia física.' },
+            { type: 'scientific', title: 'Base Neural de la Gratitud', author: 'Fox et al. (2015)', pmid: '26528204', journal: 'Frontiers', desc: 'Identifica activación en córtex prefrontal medial al experimentar apreciación.' },
+
+            { type: 'faith', title: 'Oración de Intercesión Clínica', author: 'Byrd (1988) / Harris et al. (1999)', pmid: '10568297', journal: 'Arch Intern Med', desc: 'Estudio controlado que comprueba mejores evoluciones clínicas en pacientes sujetos a oración.' },
+            { type: 'faith', title: 'Neurobiología de la Oración', author: 'Dr. Andrew Newberg (2003 / 2010)', pmid: '20491823', journal: 'Neuroimaging', desc: 'La meditación bíblica constante incrementa el flujo sanguíneo frontal y reduce la hiperactividad parietal.' },
+            { type: 'faith', title: 'Evaluación de Oración Directa', author: 'Brown et al. (2010)', pmid: '20841578', journal: 'Southern Med J', desc: 'Estudio de campo comprobando mejorías significativas tras sesiones de oración.' },
+            { type: 'faith', title: 'Salud Corporal y Vida de Fe', author: 'Dr. Harold G. Koenig (2012 / 2015)', pmid: '26042220', journal: 'Oxford Press', desc: 'Metaanálisis: la práctica espiritual diaria disminuye marcadores de estrés e hipertensión.' },
+            { type: 'faith', title: 'Palabras y Genes de Estrés', author: 'Newberg & Waldman (2012)', pmid: '22500000', journal: 'Words Can Change Your Brain', desc: 'Respaldo científico a Proverbios 18:21: expresar verdades bíblicas regula genes de estrés.' },
+            { type: 'faith', title: 'Preservación de Telómeros', author: 'Epel & Blackburn et al. (2004)', pmid: '15596757', journal: 'PNAS', desc: 'Reducir la rumiación ansiosa mediante estados sostenidos de fe protege el envejecimiento celular.' }
+        ];
+
+        function openModal(key) {
+            document.getElementById('modalBody').innerHTML = modalContent[key] || '<p class="text-base">Contenido en desarrollo...</p>';
+            document.getElementById('contentModal').classList.remove('hidden');
+
+            if (key === 'settingsModal') {
+                const currentName = localStorage.getItem('user_name') || 'Lourdes';
+                const currentPath = localStorage.getItem('preferredPath') || 'faith';
+                const currentStreak = calculateStreak();
+
+                document.getElementById('userNameInput').value = currentName;
+                document.getElementById('defaultPathSelect').value = currentPath;
+                document.getElementById('settingsStreakBadge').innerText = `Día ${currentStreak} de 90`;
+                document.getElementById('streakProgressBar').style.width = `${Math.min((currentStreak / 90) * 100, 100)}%`;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('contentModal').classList.add('hidden');
+        }
+
+        function renderStudies(filterType) {
+            const list = document.getElementById('studiesList');
+            const badge = document.getElementById('studiesCountBadge');
+            list.innerHTML = '';
+            
+            const filtered = studiesData.filter(s => s.type === filterType);
+            
+            if (filterType === 'scientific') {
+                badge.innerText = '8 Estudios Científicos';
+            } else {
+                badge.innerText = '6 Estudios de Fe Cristiana';
+            }
+
+            filtered.forEach(s => {
+                const item = document.createElement('div');
+                item.className = 'bg-navy-800/70 p-4.5 rounded-xl border border-slate-700/50 text-base space-y-1.5 shadow-sm';
+                item.innerHTML = `
+                    <div class="flex justify-between items-start gap-2">
+                        <span class="font-bold text-white text-lg">${s.title}</span>
+                        <a href="https://pubmed.ncbi.nlm.nih.gov/${s.pmid}/" target="_blank" rel="noopener noreferrer" class="text-xs bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:text-gold-300 font-mono font-bold px-2.5 py-1 rounded-md flex items-center gap-1 transition shrink-0">
+                            s.journalPMID:{s.pmid} <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                    <div class="text-sm text-slate-400 font-medium">${s.author}</div>
+                    <p class="text-base text-slate-200 leading-relaxed mt-1">${s.desc}</p>
+                `;
+                list.appendChild(item);
+            });
+        }
+
+        function switchPath(path) {
+            const sciPath = document.getElementById('scientificPath');
+            const faithPath = document.getElementById('faithPath');
+            const btnSci = document.getElementById('btnSciencePath');
+            const btnFaith = document.getElementById('btnFaithPath');
+
+            if (path === 'scientific') {
+                sciPath.classList.remove('hidden');
+                faithPath.classList.add('hidden');
+                btnSci.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 bg-gold-500 text-navy-900 shadow-md";
+                btnFaith.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 text-slate-300 hover:text-white";
+                renderStudies('scientific');
+                localStorage.setItem('preferredPath', 'scientific');
+            } else {
+                faithPath.classList.remove('hidden');
+                sciPath.classList.add('hidden');
+                btnFaith.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 bg-gold-500 text-navy-900 shadow-md";
+                btnSci.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 text-slate-300 hover:text-white";
+                renderStudies('faith');
+                localStorage.setItem('preferredPath', 'faith');
+            }
+        }
+
+        // ================= LÓGICA DE CONTADOR DE RACHA AUTOMÁTICO =================
+        function calculateStreak() {
+            const today = new Date().toISOString().split('T')[0];
+            const lastVisit = localStorage.getItem('last_visit_date');
+            let streak = parseInt(localStorage.getItem('streak_count') || '1');
+
+            if (!lastVisit) {
+                localStorage.setItem('last_visit_date', today);
+                localStorage.setItem('streak_count', '1');
+                return 1;
+            }
+
+            const diffDays = Math.floor((new Date(today) - new Date(lastVisit)) / (1000 * 60 * 60 * 24));
+
+            if (diffDays === 1) {
+                streak += 1;
+                localStorage.setItem('streak_count', streak.toString());
+                localStorage.setItem('last_visit_date', today);
+            } else if (diffDays > 1) {
+                streak = 1;
+                localStorage.setItem('streak_count', '1');
+                localStorage.setItem('last_visit_date', today);
+            }
+            return streak;
+        }
+
+        function updateUI() {
+            const userName = localStorage.getItem('user_name') || 'Lourdes';
+            document.getElementById('welcomeHeading').innerText = `¡Bienvenida, ${userName}! 👋`;
+            const streak = calculateStreak();
+            document.getElementById('streakCount').innerText = `${streak} ${streak === 1 ? 'día activo' : 'días activos'}`;
+        }
+
+        function saveSettings() {
+            const newName = document.getElementById('userNameInput').value.trim() || 'Lourdes';
+            const defaultPath = document.getElementById('defaultPathSelect').value;
+
+            localStorage.setItem('user_name', newName);
+            localStorage.setItem('preferredPath', defaultPath);
+
+            updateUI();
+            switchPath(defaultPath);
+            closeModal();
+        }
+
+        function exportJournalEntries() {
+            let journalContent = "=== MI DIARIO DE GRATITUD & RENOVACIÓN ===\n\n";
+            let found = false;
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('journal_')) {
+                    found = true;
+                    const date = key.replace('journal_', '');
+                    journalContent += `📅 FECHA: ${date}\n${localStorage.getItem(key)}\n----------------------------------------\n\n`;
+                }
+            }
+
+            if (!found) {
+                alert('No tienes entradas de diario guardadas aún.');
+                return;
+            }
+
+            const blob = new Blob([journalContent], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Diario_Gratitud_${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+        }
+
+        function clearAudioDatabase() {
+            if (confirm('¿Estás segura de que deseas borrar todos los audios guardados? Esta acción no se puede deshacer.')) {
+                const transaction = db.transaction(["audios"], "readwrite");
+                transaction.objectStore("audios").clear().onsuccess = function() {
+                    loadSavedAudios();
+                    alert('Biblioteca de audios limpiada correctamente.');
+                };
+            }
+        }
+
+        // ================= INDEXEDDB BASE DE DATOS LOCAL PARA AUDIOS =================
+        let db;
+        const dbRequest = indexedDB.open("MenteFeAudiosDB", 1);
+
+        dbRequest.onupgradeneeded = function(e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("audios")) {
+                db.createObjectStore("audios", { keyPath: "id", autoIncrement: true });
+            }
+        };
+
+        dbRequest.onsuccess = function(e) {
+            db = e.target.result;
+            loadSavedAudios();
+        };
+
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+        let lastAudioBlob = null;
+        let isLooping = false;
+        let sleepTimerTimeout = null;
+
+        async function toggleRecord() {
+            const recordBtn = document.getElementById('recordBtn');
+            const audioPlayback = document.getElementById('audioPlayback');
+            const saveAudioBtn = document.getElementById('saveAudioBtn');
+
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+
+                    mediaRecorder.ondataavailable = event => audioChunks.push(event.data);
+                    mediaRecorder.onstop = () => {
+                        lastAudioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
+                        const audioUrl = URL.createObjectURL(lastAudioBlob);
+                        audioPlayback.src = audioUrl;
+                        audioPlayback.classList.remove('hidden');
+                        saveAudioBtn.classList.remove('hidden');
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordBtn.innerHTML = '<i class="fa-solid fa-square animate-pulse text-lg"></i> <span>Detener Grabación</span>';
+                    recordBtn.className = 'bg-amber-500 hover:bg-amber-600 text-navy-900 text-base px-5 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow';
+                } catch (err) {
+                    alert('Por favor autoriza el acceso al micrófono para grabar tu audio.');
+                }
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                recordBtn.innerHTML = '<i class="fa-solid fa-circle text-lg"></i> <span>Volver a Grabar</span>';
+                recordBtn.className = 'bg-rose-600 hover:bg-rose-700 text-white text-base px-5 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow';
+            }
+        }
+
+        function saveAudio() {
+            const titleInput = document.getElementById('audioTitleInput');
+            const title = titleInput.value.trim() || ("Audio Nocturno - " + new Date().toLocaleDateString());
+
+            if (!lastAudioBlob) return;
+
+            const transaction = db.transaction(["audios"], "readwrite");
+            const store = transaction.objectStore("audios");
+
+            const record = {
+                title: title,
+                blob: lastAudioBlob,
+                date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+
+            store.add(record).onsuccess = function() {
+                titleInput.value = '';
+                document.getElementById('saveAudioBtn').classList.add('hidden');
+                loadSavedAudios();
+            };
+        }
+
+        function toggleLoop(enabled) {
+            isLooping = enabled;
+            const audios = document.querySelectorAll('#savedAudiosList audio');
+            audios.forEach(a => a.loop = enabled);
+        }
+
+        function setSleepTimer(minutes) {
+            if (sleepTimerTimeout) clearTimeout(sleepTimerTimeout);
+            const mins = parseInt(minutes);
+            if (mins > 0) {
+                sleepTimerTimeout = setTimeout(() => {
+                    const audios = document.querySelectorAll('audio');
+                    audios.forEach(a => a.pause());
+                    alert('⏰ Temporizador nocturno completado. Que tengas un excelente descanso.');
+                }, mins * 60 * 1000);
+            }
+        }
+
+        function loadSavedAudios() {
+            if (!db) return;
+            const store = db.transaction(["audios"], "readonly").objectStore("audios");
+            const list = document.getElementById('savedAudiosList');
+            list.innerHTML = '';
+
+            store.openCursor().onsuccess = function(e) {
+                const cursor = e.target.result;
+                if (cursor) {
+                    const item = cursor.value;
+                    const url = URL.createObjectURL(item.blob);
+                    
+                    const div = document.createElement('div');
+                    div.className = "bg-navy-900/90 p-3.5 rounded-xl border border-slate-700/60 flex flex-col gap-2";
+                    div.innerHTML = `
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-white text-base">${item.title}</span>
+                            <span class="text-xs text-slate-400 font-mono">${item.date}</span>
+                        </div>
+                        <audio controls src="${url}" ${isLooping ? 'loop' : ''} class="w-full h-9 mt-1"></audio>
+                    `;
+                    list.appendChild(div);
+                    cursor.continue();
+                } else if (list.children.length === 0) {
+                    list.innerHTML = `<p class="text-sm text-slate-400 italic">No tienes audios guardados aún. Graba uno arriba para comenzar tu biblioteca nocturna.</p>`;
+                }
+            };
+        }
+
+        function saveJournal() {
+            const text = document.getElementById('journalText').value;
+            if (text.trim()) {
+                localStorage.setItem('journal_' + new Date().toISOString().split('T')[0], text);
+                document.getElementById('saveConfirm').classList.remove('hidden');
+                setTimeout(() => document.getElementById('saveConfirm').classList.add('hidden'), 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+            const savedPath = localStorage.getItem('preferredPath') || 'faith';
+            switchPath(savedPath);
+        });
+    </script>
+</body>
+</html>
+

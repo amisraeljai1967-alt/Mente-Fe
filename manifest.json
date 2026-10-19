@@ -1,21 +1,18 @@
 {
-  "short_name": "Mente & Fe",
+  "id": "./",
   "name": "Mente & Fe - Renovación Diaria",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3241/3241221.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/3241/3241221.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
+  "short_name": "Mente & Fe",
+  "description": "Rutina diaria de renovación mental y espiritual",
+  "lang": "es",
   "start_url": "./index.html",
-  "background_color": "#ffffff",
-  "theme_color": "#1e40af",
+  "scope": "./",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "background_color": "#0B132B",
+  "theme_color": "#0B132B",
+  "icons": [
+    { "src": "icon-192.png", "type": "image/png", "sizes": "192x192", "purpose": "any" },
+    { "src": "icon-512.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "type": "image/png", "sizes": "512x512", "purpose": "maskable" }
+  ]
 }

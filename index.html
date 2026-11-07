@@ -59,7 +59,7 @@
 
         <!-- Banner de Bienvenida -->
         <section>
-            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1.5" id="welcomeHeading">¡Bienvenida, Lourdes! 👋</h1>
+            <h1 class="text-2xl sm:text-3xl font-bold text-white mb-1.5" id="welcomeHeading">¡Bienvenida! 👋</h1>
             <p class="text-slate-200 text-base sm:text-lg">Elige tu enfoque de renovación diaria para la sesión de hoy:</p>
         </section>
 
@@ -80,9 +80,9 @@
                     <i class="fa-solid fa-bed"></i> Rutina Nocturna Guiada
                 </span>
                 <h3 class="font-bold text-lg text-white">Sesión de Noche de 10 Minutos</h3>
-                <p class="text-sm text-slate-300">Respiración 4-7-8 + Meditación de la Cabaña + Audio Nocturno</p>
+                <p id="routineText" class="text-sm text-slate-300">Respiración 4-7-8 + Meditación de la Cabaña + Audio Nocturno</p>
             </div>
-            <button onclick="openModal('cabinMeditation')" class="bg-gold-500 hover:bg-gold-600 text-navy-900 font-extrabold text-base px-4 py-2.5 rounded-xl transition shadow shrink-0">
+            <button onclick="openNightRoutine()" class="bg-gold-500 hover:bg-gold-600 text-navy-900 font-extrabold text-base px-4 py-2.5 rounded-xl transition shadow shrink-0">
                 Iniciar
             </button>
         </section>
@@ -169,7 +169,7 @@
         <!-- ==================== CAMINO DE FE ==================== -->
         <div id="faithPath" class="space-y-4 hidden">
             <div class="bg-gradient-to-r from-navy-800 to-navy-700/60 p-5 rounded-xl border-l-4 border-gold-500 shadow-lg">
-                <span class="text-sm uppercase font-bold tracking-wider text-gold-500">Fundamento Bíblico + Exégesis</span>
+                <span class="text-sm uppercase font-bold tracking-wider text-gold-500">Fundamento Bíblico</span>
                 <h2 class="text-xl font-bold text-white mt-1">Renovación Diaria por la Palabra</h2>
                 <p class="text-base text-slate-200 mt-2 leading-relaxed">
                     Transformación continua por la renovación del entendimiento y la declaración de la verdad escrita sobre tu vida.
@@ -185,7 +185,7 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-lg text-white">A. Declaraciones Nocturnas Bíblicas</h3>
-                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Proverbios 18:21 + Versículos y Guión</p>
+                            <p class="text-sm text-slate-300 mt-0.5">Proverbios 18:21 · Romanos 10:17 + Guión</p>
                         </div>
                     </div>
                     <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
@@ -198,7 +198,7 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-lg text-white">B. Acción de Gracias & Alabanza</h3>
-                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de 1 Tesalonicenses 5:18 y Salmo 103</p>
+                            <p class="text-sm text-slate-300 mt-0.5">1 Tesalonicenses 5:18 y Salmo 103:2</p>
                         </div>
                     </div>
                     <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
@@ -211,7 +211,7 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-lg text-white">C. Identidad en Cristo & Re-etiquetado</h3>
-                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Efesios 2:10 (Poiema) y 2 Corintios 5:17</p>
+                            <p class="text-sm text-slate-300 mt-0.5">Efesios 2:10 y 2 Corintios 5:17</p>
                         </div>
                     </div>
                     <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
@@ -224,20 +224,20 @@
                         </div>
                         <div>
                             <h3 class="font-bold text-lg text-white">D. Renovación de la Mente & Meditación</h3>
-                            <p class="text-sm text-slate-300 mt-0.5">Exégesis de Romanos 12:2 (Metamorphoo) y Josué 1:8</p>
+                            <p class="text-sm text-slate-300 mt-0.5">Romanos 12:2 y Josué 1:8</p>
                         </div>
                     </div>
                     <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
                 </div>
 
-                <div onclick="openModal('cabinMeditation')" class="bg-navy-800 p-4.5 rounded-xl border border-gold-500/50 hover:border-gold-400 cursor-pointer transition flex items-center justify-between shadow-md">
+                <div onclick="openModal('cabinFaith')" class="bg-navy-800 p-4.5 rounded-xl border border-gold-500/50 hover:border-gold-400 cursor-pointer transition flex items-center justify-between shadow-md">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-2xl shrink-0">
                             <i class="fa-solid fa-house-chimney-window"></i>
                         </div>
                         <div>
-                            <h3 class="font-bold text-lg text-white">E. Meditación Guiada: La Cabaña en Cristo</h3>
-                            <p class="text-sm text-slate-300 mt-0.5">Encuentro con tu versión futura formada por el Señor</p>
+                            <h3 class="font-bold text-lg text-white">E. Meditación Guiada: La Cabaña con Cristo</h3>
+                            <p class="text-sm text-slate-300 mt-0.5">Un encuentro de descanso con Cristo</p>
                         </div>
                     </div>
                     <i class="fa-solid fa-chevron-right text-base text-slate-400"></i>
@@ -251,7 +251,7 @@
                 <i class="fa-solid fa-microphone text-xl"></i> Grabadora & Mi Biblioteca Nocturna
             </h3>
             <p class="text-base text-slate-200 leading-relaxed">
-                Graba tus declaraciones con tu voz y **guárdalas permanentemente en la app** para escucharlas cada noche antes de dormir.
+                Graba tus declaraciones con tu voz y <strong class="text-white">guárdalas permanentemente en la app</strong> para escucharlas cada noche antes de dormir.
             </p>
             
             <div class="space-y-3 bg-navy-900/80 p-4 rounded-xl border border-slate-700/60">
@@ -380,32 +380,61 @@
                 </div>
             `,
 
+            cabinFaith: `
+                <div class="space-y-5 text-base leading-relaxed">
+                    <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo E</span>
+                    <h2 class="text-2xl font-bold text-white">Meditación Guiada: La Cabaña con Cristo</h2>
+
+                    <div class="bg-navy-900/90 p-4 rounded-xl border border-gold-500/30 space-y-2">
+                        <p class="font-bold text-gold-400 text-sm">🫁 Antes de comenzar: respiración tranquila</p>
+                        <p class="text-slate-200 text-sm">
+                            Cierra los ojos. Inhala despacio por la nariz contando <strong class="text-white">4</strong>… sostén el aire contando <strong class="text-white">7</strong>… y suéltalo lentamente por la boca contando <strong class="text-white">8</strong>. Repite 3 o 4 veces. Respirar así, despacio, ayuda a que el cuerpo se relaje. Es la respiración llamada «4-7-8».
+                        </p>
+                    </div>
+
+                    <div class="bg-navy-900/90 p-5 rounded-xl border-l-4 border-gold-500 space-y-4">
+                        <p class="text-slate-100 text-base leading-loose">Imagina que caminas por un sendero silencioso y solitario. La brisa de la tarde es fría, las sombras de los árboles empiezan a alargarse y la oscuridad de la noche se avecina con prisa. Tus pies pesan, el cansancio de la caminata te carcome los hombros y el alma se siente agotada por las batallas del día. Lo único que cruza por tu mente es una necesidad desesperada: encontrar un refugio, un lugar seguro y cálido donde pasar la noche y descansar por fin.</p>
+                        <p class="text-slate-100 text-base leading-loose">En medio de la penumbra… al fondo del camino… vislumbras una pequeña y acogedora cabaña de madera. Una luz suave y dorada se filtra por su ventana, como una promesa de paz en medio de la tormenta.</p>
+                        <p class="text-slate-100 text-base leading-loose">Con las pocas fuerzas que te quedan, te acercas y tocas la puerta. Se abre con suavidad. En la penumbra, una figura te recibe con una mirada tan tierna, tan llena de un amor que no depende de lo que hayas hecho, que el corazón se te estremece. En ese instante, al darte cuenta de quién es… de que estás frente a Cristo, el Maestro, tu Salvador, que te ha estado esperando en medio de tu silencio… las lágrimas brotan de tus ojos, no de tristeza, sino por la abrumadora certeza de que has encontrado el lugar seguro que tanto buscabas.</p>
+                        <p class="text-slate-100 text-base leading-loose">Él no dice nada al principio. Simplemente da un paso al frente, abre Sus brazos y te envuelve en un abrazo tan fuerte y cálido que desarma todos tus miedos y repara cada pedazo cansado de tu interior. Sientes Sus manos sosteniéndote, limpiando tu llanto… y recuerdas lo que Él mismo dijo: <em class="text-gold-400">«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar»</em> (Mateo 11:28).</p>
+                        <p class="text-slate-100 text-base leading-loose">En este refugio, en Su presencia, ya no tienes que ser fuerte. La noche es segura y puedes descansar.</p>
+                        <p class="text-slate-100 text-base leading-loose">Respira hondo… y quédate aquí, en Sus brazos, el tiempo que necesites. Y mientras tu cuerpo se aquieta, le dices en voz baja: <em class="text-gold-400">«En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado»</em> (Salmo 4:8).</p>
+                        <p class="text-slate-100 text-base leading-loose">Quédate en silencio… descansa… porque Él tiene cuidado de ti (1 Pedro 5:7).</p>
+                    </div>
+
+                    <div class="bg-navy-700/60 p-4 rounded-xl">
+                        <p class="text-sm text-slate-200">
+                            💡 <strong class="text-white">Tip:</strong> Lee este guión en voz alta, con calma, y grábalo con la <strong class="text-white">Grabadora</strong> de la app (en la pantalla principal). Después escúchalo antes de dormir como tu meditación guiada nocturna.
+                        </p>
+                    </div>
+                </div>
+            `,
+
             faithAudio: `
                 <div class="space-y-4 text-base">
                     <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo A</span>
                     <h2 class="text-2xl font-bold text-white">Declaraciones Nocturnas con la Palabra</h2>
-                    
+
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Proverbios 18:21</p>
                         <p class="italic text-slate-100 text-base">"La muerte y la vida están en poder de la lengua, y el que la ama comerá de sus frutos."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> En el hebreo original, la palabra traducida como "poder" es <em class="text-gold-400 font-serif">Yad</em> (que significa literalmente "mano"). Tu lengua no emite simples sonidos al aire; tiene "mano física" para moldear tu realidad. Las palabras que declaras activan el filtro atencional de tu mente y alinean tu espíritu con la verdad de Dios.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> En el hebreo, la palabra traducida como "poder" es <em class="text-gold-400 font-serif">Yad</em>, que significa literalmente "mano". La lengua tiene "mano": lo que decimos tiene fuerza para edificar o para destruir.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Cuida lo que declaras. Tus palabras pueden sembrar vida, ánimo y verdad sobre ti y sobre las personas que te rodean.</p>
                     </div>
 
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Romanos 10:17</p>
                         <p class="italic text-slate-100 text-base">"Así que la fe es por el oír, y el oír, por la palabra de Dios."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> "Oír" en el griego es <em class="text-gold-400 font-serif">Akoe</em>, que implica una escucha activa y continua. Al grabar las escrituras con tu propia voz y escucharlas antes de dormir, alimentas tu espíritu y tu inconsciente en el momento de mayor receptividad.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> En el griego, "oír" es <em class="text-gold-400 font-serif">Akoé</em>, palabra que se refiere al oído y también a lo que se escucha: el mensaje. La fe nace al escuchar la Palabra de Dios.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Al grabar las escrituras con tu propia voz y escucharlas antes de dormir, vuelves a escuchar la Palabra y alimentas tu fe al terminar el día.</p>
                     </div>
 
                     <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
                         <h4 class="font-bold text-white text-lg">🎙️ Guión Recomendado para Grabar hoy:</h4>
                         <p class="text-slate-100 leading-relaxed italic text-base">
-                            "En paz me acostaré y asimismo dormiré, porque solo Tú, Señor, me haces vivir confiada (Salmo 4:8). Mi mente está resguardada en la paz que sobrepasa todo entendimiento (Filipenses 4:7). Ningún pensamiento de temor prevalece hoy en mí, porque Dios me ha dado espíritu de poder, de amor y de dominio propio (2 Timoteo 1:7)."
+                            "En paz me acostaré, y asimismo dormiré; porque solo tú, Jehová, me haces vivir confiado (Salmo 4:8). La paz de Dios, que sobrepasa todo entendimiento, guardará mi corazón y mis pensamientos en Cristo Jesús (Filipenses 4:7). Ningún pensamiento de temor prevalece hoy en mí, porque Dios no me ha dado espíritu de cobardía, sino de poder, de amor y de dominio propio (2 Timoteo 1:7)."
                         </p>
+                        <p class="text-xs text-slate-300">Versículos en Reina-Valera 1960. En Filipenses 4:7 se dice "mi corazón y mis pensamientos" para poder declararlo en primera persona.</p>
                     </div>
                 </div>
             `,
@@ -414,21 +443,19 @@
                 <div class="space-y-4 text-base">
                     <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo B</span>
                     <h2 class="text-2xl font-bold text-white">Acción de Gracias & Alabanza</h2>
-                    
+
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 1 Tesalonicenses 5:18</p>
                         <p class="italic text-slate-100 text-base">"Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> "Dad gracias" proviene del griego <em class="text-gold-400 font-serif">Eucharisteo</em> (de donde viene la palabra Eucaristía), cuya raíz es <em class="text-gold-400">Charis</em> (Gracia) y <em class="text-gold-400">Chara</em> (Gozo). Agradecer no es un acto pasivo; es reconocer activamente la gracia de Dios, lo cual desata el gozo y reprograma tu corazón para enfocarse en la abundancia divina.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> "Dad gracias" viene del griego <em class="text-gold-400 font-serif">Eucharisteo</em> (de donde viene la palabra Eucaristía), emparentada con <em class="text-gold-400 font-serif">Charis</em>, que significa gracia.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Dar gracias es reconocer lo que Dios ya hizo. En lugar de enfocarte solo en lo que falta, aprendes a ver Su fidelidad en medio del día.</p>
                     </div>
 
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Salmo 103:2</p>
                         <p class="italic text-slate-100 text-base">"Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Teológica:</strong> La mente humana tiende naturalmente a olvidar las victorias pasadas y enfocarse en los problemas presentes (sesgo de negatividad). Este Salmo es una orden directa de tu espíritu a tu alma para obligarla a recordar la fidelidad de Dios.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> En hebreo, "alma" es <em class="text-gold-400 font-serif">Nefesh</em>: el ser completo, con tus pensamientos y emociones. David le habla a su propio ser y le pide que recuerde.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Es fácil recordar los problemas y olvidar lo recibido. Este Salmo es una invitación a recordar, a propósito, la fidelidad de Dios.</p>
                     </div>
                 </div>
             `,
@@ -437,21 +464,19 @@
                 <div class="space-y-4 text-base">
                     <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo C</span>
                     <h2 class="text-2xl font-bold text-white">Identidad en Cristo & Re-etiquetado</h2>
-                    
+
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Efesios 2:10</p>
-                        <p class="italic text-slate-100 text-base">"Porque somos hechura suya, creados en Cristo Jesús para buenas obras..."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> La palabra traducida como "hechura" en el griego original es <em class="text-gold-400 font-serif">Poiema</em> (de donde proviene nuestra palabra "poema" u obra de arte). No eres un producto del azar, de tus errores pasados ni de las etiquetas que otros te pusieron; eres un diseño magistral e intencionado de Dios.
-                        </p>
+                        <p class="italic text-slate-100 text-base">"Porque somos hechura suya, creados en Cristo Jesús para buenas obras, las cuales Dios preparó de antemano para que anduviésemos en ellas."</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> La palabra traducida como "hechura" en el griego original es <em class="text-gold-400 font-serif">Poiema</em> (de donde viene nuestra palabra "poema"): una obra de arte hecha con intención.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> No eres un producto del azar, de tus errores pasados ni de las etiquetas que otros te pusieron. Eres obra de Dios, hecha con propósito.</p>
                     </div>
 
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 2 Corintios 5:17</p>
                         <p class="italic text-slate-100 text-base">"De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Aplicación Práctica:</strong> Tus antiguas etiquetas ("soy inconstante", "soy ansiosa") pertenecen a la naturaleza vieja. En Cristo, tienes el derecho legal y espiritual de asumir una nueva identidad de disciplina, paz y victoria.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> "Nueva criatura" es <em class="text-gold-400 font-serif">Kainé ktisis</em>: una nueva creación, nueva en su calidad y no solo en su apariencia.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Las etiquetas viejas ("soy inconstante", "soy ansiosa") ya no tienen la última palabra. En Cristo tienes una nueva identidad de paz y de esperanza, y puedes empezar a vivir desde ahí.</p>
                     </div>
                 </div>
             `,
@@ -460,21 +485,19 @@
                 <div class="space-y-4 text-base">
                     <span class="text-sm uppercase font-bold text-gold-500 tracking-wider">Camino de Fe • Módulo D</span>
                     <h2 class="text-2xl font-bold text-white">Renovación de la Mente & Meditación</h2>
-                    
+
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Romanos 12:2</p>
-                        <p class="italic text-slate-100 text-base">"...sino transformaos por medio de la renovación de vuestro entendimiento..."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> "Transformaos" en el griego es <em class="text-gold-400 font-serif">Metamorphoo</em> (de donde viene metamorfosis). No es un cambio externo superficial, sino un cambio estructural biológico y espiritual que ocurre únicamente cuando sustituyes mentiras viejas por la Verdad de Dios.
-                        </p>
+                        <p class="italic text-slate-100 text-base">"No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta."</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> "Transformaos" en el griego es <em class="text-gold-400 font-serif">Metamorphoo</em> (de donde viene "metamorfosis"): un cambio profundo, de adentro hacia afuera, y no solo de apariencia.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Esta transformación comienza cuando sustituyes, día a día, los pensamientos de miedo, culpa o mentira por la verdad de Dios.</p>
                     </div>
 
                     <div class="bg-navy-900/90 p-4.5 rounded-xl border-l-4 border-gold-500 space-y-2">
                         <p class="font-bold text-gold-400 text-lg">📖 Josué 1:8</p>
                         <p class="italic text-slate-100 text-base">"Nunca se apartará de tu boca este libro de la ley, sino que de día y de noche meditarás en él..."</p>
-                        <p class="text-slate-200 leading-relaxed text-base">
-                            <strong class="text-white">Explicación Exegética:</strong> La palabra hebrea para "meditar" es <em class="text-gold-400 font-serif">Hagah</em>, que significa literalmente "rumiar", murmurar o musitar en voz baja. A diferencia de la meditación oriental (vaciar la mente), la meditación bíblica es <strong class="text-white">llenar la mente</strong> de la Palabra y repetirla activamente.
-                        </p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> La palabra hebrea para "meditar" es <em class="text-gold-400 font-serif">Hagah</em>, que significa murmurar o repetir en voz baja. A diferencia de vaciar la mente, la meditación bíblica consiste en <strong class="text-white">llenar la mente</strong> con la Palabra.</p>
+                        <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Repite en voz baja un versículo durante el día y antes de dormir. Deja que la Palabra llene tu mente en lugar de la preocupación.</p>
                     </div>
                 </div>
             `,
@@ -626,20 +649,21 @@
             { type: 'scientific', title: 'Efecto Placebo y Expectativa', author: 'Benedetti et al. (2005)', pmid: '16282226', journal: 'J. Neuroscience', desc: 'La expectativa consciente libera neurotransmisores reales modulando la experiencia física.' },
             { type: 'scientific', title: 'Base Neural de la Gratitud', author: 'Fox et al. (2015)', pmid: '26528204', journal: 'Frontiers', desc: 'Identifica activación en córtex prefrontal medial al experimentar apreciación.' },
 
-            { type: 'faith', title: 'Oración de Intercesión Clínica', author: 'Byrd (1988) / Harris et al. (1999)', pmid: '10568297', journal: 'Arch Intern Med', desc: 'Estudio controlado que comprueba mejores evoluciones clínicas en pacientes sujetos a oración.' },
-            { type: 'faith', title: 'Neurobiología de la Oración', author: 'Dr. Andrew Newberg (2003 / 2010)', pmid: '20491823', journal: 'Neuroimaging', desc: 'La meditación bíblica constante incrementa el flujo sanguíneo frontal y reduce la hiperactividad parietal.' },
-            { type: 'faith', title: 'Evaluación de Oración Directa', author: 'Brown et al. (2010)', pmid: '20841578', journal: 'Southern Med J', desc: 'Estudio de campo comprobando mejorías significativas tras sesiones de oración.' },
-            { type: 'faith', title: 'Salud Corporal y Vida de Fe', author: 'Dr. Harold G. Koenig (2012 / 2015)', pmid: '26042220', journal: 'Oxford Press', desc: 'Metaanálisis: la práctica espiritual diaria disminuye marcadores de estrés e hipertensión.' },
-            { type: 'faith', title: 'Palabras y Genes de Estrés', author: 'Newberg & Waldman (2012)', pmid: '22500000', journal: 'Words Can Change Your Brain', desc: 'Respaldo científico a Proverbios 18:21: expresar verdades bíblicas regula genes de estrés.' },
-            { type: 'faith', title: 'Preservación de Telómeros', author: 'Epel & Blackburn et al. (2004)', pmid: '15596757', journal: 'PNAS', desc: 'Reducir la rumiación ansiosa mediante estados sostenidos de fe protege el envejecimiento celular.' }
+            { type: 'faith', title: 'Oración Meditativa y Cerebro', author: 'Newberg et al. (2003)', pmid: '14620252', journal: 'Percept. Mot. Skills', desc: 'Estudio piloto con monjas franciscanas que repetían mentalmente una frase de oración: se observó mayor flujo sanguíneo en la corteza prefrontal. Muestra muy pequeña, por lo que es un hallazgo preliminar.' },
+            { type: 'faith', title: 'Estrés Sostenido y Envejecimiento Celular', author: 'Epel et al. (2004)', pmid: '15574496', journal: 'PNAS', desc: 'En un grupo de madres, quienes vivían con más estrés percibido tenían telómeros más cortos (un indicador de envejecimiento celular). Muestra por qué cuidar la calma importa, aunque no evaluó la fe.' },
+            { type: 'faith', title: 'Religión, Espiritualidad y Salud', author: 'Koenig (2012)', pmid: '23762764', journal: 'ISRN Psychiatry', desc: 'Revisión de investigaciones sobre religión, espiritualidad y salud física y mental. Reúne asociaciones; por sí sola no demuestra que la fe cause la mejoría.' }
         ];
+
+        function openNightRoutine() {
+            openModal(localStorage.getItem('preferredPath') === 'scientific' ? 'cabinMeditation' : 'cabinFaith');
+        }
 
         function openModal(key) {
             document.getElementById('modalBody').innerHTML = modalContent[key] || '<p class="text-base">Contenido en desarrollo...</p>';
             document.getElementById('contentModal').classList.remove('hidden');
 
             if (key === 'settingsModal') {
-                const currentName = localStorage.getItem('user_name') || 'Lourdes';
+                const currentName = localStorage.getItem('user_name') || '';
                 const currentPath = localStorage.getItem('preferredPath') || 'faith';
                 const currentStreak = calculateStreak();
 
@@ -664,7 +688,7 @@
             if (filterType === 'scientific') {
                 badge.innerText = '8 Estudios Científicos';
             } else {
-                badge.innerText = '6 Estudios de Fe Cristiana';
+                badge.innerText = '3 Estudios sobre Fe y Salud';
             }
 
             filtered.forEach(s => {
@@ -674,7 +698,7 @@
                     <div class="flex justify-between items-start gap-2">
                         <span class="font-bold text-white text-lg">${s.title}</span>
                         <a href="https://pubmed.ncbi.nlm.nih.gov/${s.pmid}/" target="_blank" rel="noopener noreferrer" class="text-xs bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:text-gold-300 font-mono font-bold px-2.5 py-1 rounded-md flex items-center gap-1 transition shrink-0">
-                            s.journalPMID:{s.pmid} <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
+                            PMID ${s.pmid} <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
                         </a>
                     </div>
                     <div class="text-sm text-slate-400 font-medium">${s.author}</div>
@@ -697,6 +721,7 @@
                 btnFaith.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 text-slate-300 hover:text-white";
                 renderStudies('scientific');
                 localStorage.setItem('preferredPath', 'scientific');
+                document.getElementById('routineText').innerText = 'Respiración 4-7-8 + Meditación de la Cabaña + Audio Nocturno';
             } else {
                 faithPath.classList.remove('hidden');
                 sciPath.classList.add('hidden');
@@ -704,6 +729,7 @@
                 btnSci.className = "py-3.5 px-3 rounded-lg text-base sm:text-lg font-bold flex items-center justify-center gap-2 text-slate-300 hover:text-white";
                 renderStudies('faith');
                 localStorage.setItem('preferredPath', 'faith');
+                document.getElementById('routineText').innerText = 'Respiración tranquila + La Cabaña con Cristo + Audio Nocturno';
             }
         }
 
@@ -734,14 +760,14 @@
         }
 
         function updateUI() {
-            const userName = localStorage.getItem('user_name') || 'Lourdes';
-            document.getElementById('welcomeHeading').innerText = `¡Bienvenida, ${userName}! 👋`;
+            const userName = (localStorage.getItem('user_name') || '').trim();
+            document.getElementById('welcomeHeading').innerText = userName ? `¡Bienvenida, ${userName}! 👋` : '¡Bienvenida! 👋';
             const streak = calculateStreak();
             document.getElementById('streakCount').innerText = `${streak} ${streak === 1 ? 'día activo' : 'días activos'}`;
         }
 
         function saveSettings() {
-            const newName = document.getElementById('userNameInput').value.trim() || 'Lourdes';
+            const newName = document.getElementById('userNameInput').value.trim();
             const defaultPath = document.getElementById('defaultPathSelect').value;
 
             localStorage.setItem('user_name', newName);

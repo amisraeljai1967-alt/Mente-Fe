@@ -251,7 +251,7 @@
                 <i class="fa-solid fa-microphone text-xl"></i> Grabadora & Mi Biblioteca Nocturna
             </h3>
             <p class="text-base text-slate-200 leading-relaxed">
-                Graba tus declaraciones con tu voz y <strong class="text-white">guárdalas permanentemente en la app</strong> para escucharlas cada noche antes de dormir.
+                Graba tus declaraciones con tu voz y <strong class="text-white">guárdalas en este dispositivo</strong> para escucharlas cada noche antes de dormir.
             </p>
             
             <div class="space-y-3 bg-navy-900/80 p-4 rounded-xl border border-slate-700/60">
@@ -290,6 +290,7 @@
                 <div id="savedAudiosList" class="space-y-2.5">
                     <!-- Audios guardados se renderizan vía IndexedDB -->
                 </div>
+                <p class="text-xs text-slate-400 mt-2">Tus audios se guardan solo en este dispositivo.</p>
             </div>
         </section>
 
@@ -404,9 +405,25 @@
 
                     <div class="bg-navy-700/60 p-4 rounded-xl">
                         <p class="text-sm text-slate-200">
-                            💡 <strong class="text-white">Tip:</strong> Lee este guión en voz alta, con calma, y grábalo con la <strong class="text-white">Grabadora</strong> de la app (en la pantalla principal). Después escúchalo antes de dormir como tu meditación guiada nocturna.
+                            💡 <strong class="text-white">Tip:</strong> Toca <strong class="text-white">«Grabar este guión»</strong>, lee el texto de arriba en voz alta, con calma, y guárdalo. Después escúchalo antes de dormir en <strong class="text-white">Mis Audios Nocturnos</strong>.
                         </p>
                     </div>
+
+                    <div id="scriptRecBar" data-title="La Cabaña con Cristo" class="sticky bottom-0 bg-navy-800/95 border border-gold-500/30 p-3.5 rounded-xl space-y-2.5 shadow-lg">
+                        <button id="scriptRecBtn" onclick="toggleScriptRec()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                            <i class="fa-solid fa-microphone"></i> <span>Grabar este guión</span>
+                        </button>
+                        <p id="scriptRecHint" class="text-xs text-slate-300 text-center">Lee el guión en voz alta, a tu ritmo. Puedes mover el texto mientras grabas.</p>
+                        <audio id="scriptRecPlayback" controls class="hidden w-full h-10"></audio>
+                        <div id="scriptRecSaveBox" class="hidden space-y-2">
+                            <input id="scriptRecTitle" type="text" placeholder="Título de tu audio (opcional)" class="w-full bg-navy-900 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                            <button onclick="saveScriptRec()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                                <i class="fa-solid fa-floppy-disk"></i> <span>Guardar en Mis audios nocturnos</span>
+                            </button>
+                        </div>
+                        <p id="scriptRecDone" class="hidden text-sm text-emerald-400 font-bold text-center">✓ Guardado. Lo encuentras en «Mis Audios Nocturnos» en la pantalla principal.</p>
+                    </div>
+
                 </div>
             `,
 
@@ -436,7 +453,22 @@
                         </p>
                         <p class="text-xs text-slate-300">Versículos en Reina-Valera 1960. En Filipenses 4:7 se dice "mi corazón y mis pensamientos" para poder declararlo en primera persona.</p>
                     </div>
-                </div>
+                
+                    <div id="scriptRecBar" data-title="Declaración nocturna" class="sticky bottom-0 bg-navy-800/95 border border-gold-500/30 p-3.5 rounded-xl space-y-2.5 shadow-lg">
+                        <button id="scriptRecBtn" onclick="toggleScriptRec()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                            <i class="fa-solid fa-microphone"></i> <span>Grabar este guión</span>
+                        </button>
+                        <p id="scriptRecHint" class="text-xs text-slate-300 text-center">Lee el guión en voz alta, a tu ritmo. Puedes mover el texto mientras grabas.</p>
+                        <audio id="scriptRecPlayback" controls class="hidden w-full h-10"></audio>
+                        <div id="scriptRecSaveBox" class="hidden space-y-2">
+                            <input id="scriptRecTitle" type="text" placeholder="Título de tu audio (opcional)" class="w-full bg-navy-900 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                            <button onclick="saveScriptRec()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                                <i class="fa-solid fa-floppy-disk"></i> <span>Guardar en Mis audios nocturnos</span>
+                            </button>
+                        </div>
+                        <p id="scriptRecDone" class="hidden text-sm text-emerald-400 font-bold text-center">✓ Guardado. Lo encuentras en «Mis Audios Nocturnos» en la pantalla principal.</p>
+                    </div>
+</div>
             `,
 
             faithJournal: `
@@ -457,7 +489,30 @@
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> En hebreo, "alma" es <em class="text-gold-400 font-serif">Nefesh</em>: el ser completo, con tus pensamientos y emociones. David le habla a su propio ser y le pide que recuerde.</p>
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Es fácil recordar los problemas y olvidar lo recibido. Este Salmo es una invitación a recordar, a propósito, la fidelidad de Dios.</p>
                     </div>
-                </div>
+                
+                    <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
+                        <h4 class="font-bold text-white text-lg">🎙️ Guión Recomendado para Grabar hoy:</h4>
+                        <p class="text-slate-100 leading-relaxed italic text-base">
+                            "Tu Palabra dice: «Dad gracias en todo, porque esta es la voluntad de Dios para con vosotros en Cristo Jesús» (1 Tesalonicenses 5:18). Hoy obedezco. Gracias, Padre, por… (haz una pausa y nombra tres cosas de hoy). «Bendice, alma mía, a Jehová, y no olvides ninguno de sus beneficios» (Salmo 103:2). Recuerdo lo que has hecho, y mi corazón descansa agradecido."
+                        </p>
+                        <p class="text-xs text-slate-300">Versículos en Reina-Valera 1960.</p>
+                    </div>
+
+                    <div id="scriptRecBar" data-title="Acción de gracias" class="sticky bottom-0 bg-navy-800/95 border border-gold-500/30 p-3.5 rounded-xl space-y-2.5 shadow-lg">
+                        <button id="scriptRecBtn" onclick="toggleScriptRec()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                            <i class="fa-solid fa-microphone"></i> <span>Grabar este guión</span>
+                        </button>
+                        <p id="scriptRecHint" class="text-xs text-slate-300 text-center">Lee el guión en voz alta, a tu ritmo. Puedes mover el texto mientras grabas.</p>
+                        <audio id="scriptRecPlayback" controls class="hidden w-full h-10"></audio>
+                        <div id="scriptRecSaveBox" class="hidden space-y-2">
+                            <input id="scriptRecTitle" type="text" placeholder="Título de tu audio (opcional)" class="w-full bg-navy-900 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                            <button onclick="saveScriptRec()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                                <i class="fa-solid fa-floppy-disk"></i> <span>Guardar en Mis audios nocturnos</span>
+                            </button>
+                        </div>
+                        <p id="scriptRecDone" class="hidden text-sm text-emerald-400 font-bold text-center">✓ Guardado. Lo encuentras en «Mis Audios Nocturnos» en la pantalla principal.</p>
+                    </div>
+</div>
             `,
 
             faithIdentity: `
@@ -478,7 +533,30 @@
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> "Nueva criatura" es <em class="text-gold-400 font-serif">Kainé ktisis</em>: una nueva creación, nueva en su calidad y no solo en su apariencia.</p>
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Las etiquetas viejas ("soy inconstante", "soy ansiosa") ya no tienen la última palabra. En Cristo tienes una nueva identidad de paz y de esperanza, y puedes empezar a vivir desde ahí.</p>
                     </div>
-                </div>
+                
+                    <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
+                        <h4 class="font-bold text-white text-lg">🎙️ Guión Recomendado para Grabar hoy:</h4>
+                        <p class="text-slate-100 leading-relaxed italic text-base">
+                            "La Palabra de Dios dice que «somos hechura suya, creados en Cristo Jesús para buenas obras» (Efesios 2:10). No soy el resumen de mis errores ni las etiquetas que otros me pusieron. «De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas» (2 Corintios 5:17). Hoy me recibo como Dios me ve: amado, perdonado y renovado."
+                        </p>
+                        <p class="text-xs text-slate-300">Versículos en Reina-Valera 1960.</p>
+                    </div>
+
+                    <div id="scriptRecBar" data-title="Identidad en Cristo" class="sticky bottom-0 bg-navy-800/95 border border-gold-500/30 p-3.5 rounded-xl space-y-2.5 shadow-lg">
+                        <button id="scriptRecBtn" onclick="toggleScriptRec()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                            <i class="fa-solid fa-microphone"></i> <span>Grabar este guión</span>
+                        </button>
+                        <p id="scriptRecHint" class="text-xs text-slate-300 text-center">Lee el guión en voz alta, a tu ritmo. Puedes mover el texto mientras grabas.</p>
+                        <audio id="scriptRecPlayback" controls class="hidden w-full h-10"></audio>
+                        <div id="scriptRecSaveBox" class="hidden space-y-2">
+                            <input id="scriptRecTitle" type="text" placeholder="Título de tu audio (opcional)" class="w-full bg-navy-900 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                            <button onclick="saveScriptRec()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                                <i class="fa-solid fa-floppy-disk"></i> <span>Guardar en Mis audios nocturnos</span>
+                            </button>
+                        </div>
+                        <p id="scriptRecDone" class="hidden text-sm text-emerald-400 font-bold text-center">✓ Guardado. Lo encuentras en «Mis Audios Nocturnos» en la pantalla principal.</p>
+                    </div>
+</div>
             `,
 
             faithMind: `
@@ -499,7 +577,30 @@
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-white">En el idioma original:</strong> La palabra hebrea para "meditar" es <em class="text-gold-400 font-serif">Hagah</em>, que significa murmurar o repetir en voz baja. A diferencia de vaciar la mente, la meditación bíblica consiste en <strong class="text-white">llenar la mente</strong> con la Palabra.</p>
                         <p class="text-slate-200 leading-relaxed text-base"><strong class="text-gold-400">Para tu vida:</strong> Repite en voz baja un versículo durante el día y antes de dormir. Deja que la Palabra llene tu mente en lugar de la preocupación.</p>
                     </div>
-                </div>
+                
+                    <div class="bg-navy-700/60 p-4.5 rounded-xl space-y-2">
+                        <h4 class="font-bold text-white text-lg">🎙️ Guión Recomendado para Grabar hoy:</h4>
+                        <p class="text-slate-100 leading-relaxed italic text-base">
+                            "La Palabra dice: «No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento» (Romanos 12:2). Hoy renuncio al miedo, a la culpa y a las mentiras que he repetido en mi mente, y pongo en su lugar la verdad de Dios. «Nunca se apartará de tu boca este libro de la ley, sino que de día y de noche meditarás en él» (Josué 1:8). Medito en Tu Palabra, y mi mente se llena de paz."
+                        </p>
+                        <p class="text-xs text-slate-300">Versículos en Reina-Valera 1960.</p>
+                    </div>
+
+                    <div id="scriptRecBar" data-title="Renovación de la mente" class="sticky bottom-0 bg-navy-800/95 border border-gold-500/30 p-3.5 rounded-xl space-y-2.5 shadow-lg">
+                        <button id="scriptRecBtn" onclick="toggleScriptRec()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                            <i class="fa-solid fa-microphone"></i> <span>Grabar este guión</span>
+                        </button>
+                        <p id="scriptRecHint" class="text-xs text-slate-300 text-center">Lee el guión en voz alta, a tu ritmo. Puedes mover el texto mientras grabas.</p>
+                        <audio id="scriptRecPlayback" controls class="hidden w-full h-10"></audio>
+                        <div id="scriptRecSaveBox" class="hidden space-y-2">
+                            <input id="scriptRecTitle" type="text" placeholder="Título de tu audio (opcional)" class="w-full bg-navy-900 border border-slate-600 rounded-lg p-3 text-base text-white focus:border-gold-500 focus:outline-none">
+                            <button onclick="saveScriptRec()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base px-4 py-3 rounded-xl flex items-center justify-center gap-2 transition shadow">
+                                <i class="fa-solid fa-floppy-disk"></i> <span>Guardar en Mis audios nocturnos</span>
+                            </button>
+                        </div>
+                        <p id="scriptRecDone" class="hidden text-sm text-emerald-400 font-bold text-center">✓ Guardado. Lo encuentras en «Mis Audios Nocturnos» en la pantalla principal.</p>
+                    </div>
+</div>
             `,
 
             sciAudio: `
@@ -586,6 +687,12 @@
                     <div id="saveConfirm" class="hidden text-center text-base text-emerald-400 font-bold">
                         ✓ Entrada guardada correctamente
                     </div>
+
+                    <div class="pt-3 border-t border-slate-700/60 space-y-3">
+                        <h4 class="font-bold text-white text-base">Mis entradas anteriores:</h4>
+                        <div id="journalList" class="space-y-3"></div>
+                        <p class="text-xs text-slate-400">Tu diario se guarda solo en este dispositivo.</p>
+                    </div>
                 </div>
             `,
 
@@ -627,9 +734,13 @@
                         <button onclick="exportJournalEntries()" class="w-full bg-navy-700 hover:bg-navy-600 border border-slate-600 text-white font-bold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-file-arrow-down"></i> Exportar Entradas del Diario (.txt)
                         </button>
+                        <button onclick="clearJournal()" class="w-full bg-rose-900/40 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 font-bold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-trash-can"></i> Borrar Todo el Diario
+                        </button>
                         <button onclick="clearAudioDatabase()" class="w-full bg-rose-900/40 hover:bg-rose-900/60 border border-rose-500/30 text-rose-300 font-bold text-sm py-3 rounded-xl transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-trash-can"></i> Borrar Biblioteca de Audios
                         </button>
+                        <p class="text-xs text-slate-400">Tu diario y tus audios se guardan solo en este dispositivo. Si borras los datos del navegador o cambias de teléfono, se pierden. Usa «Exportar» para conservar una copia del diario.</p>
                     </div>
 
                     <button onclick="saveSettings()" class="w-full bg-gold-500 hover:bg-gold-600 text-navy-900 font-bold text-base py-3.5 rounded-xl transition shadow-lg mt-2">
@@ -649,9 +760,9 @@
             { type: 'scientific', title: 'Efecto Placebo y Expectativa', author: 'Benedetti et al. (2005)', pmid: '16282226', journal: 'J. Neuroscience', desc: 'La expectativa consciente libera neurotransmisores reales modulando la experiencia física.' },
             { type: 'scientific', title: 'Base Neural de la Gratitud', author: 'Fox et al. (2015)', pmid: '26528204', journal: 'Frontiers', desc: 'Identifica activación en córtex prefrontal medial al experimentar apreciación.' },
 
-            { type: 'faith', title: 'Oración Meditativa y Cerebro', author: 'Newberg et al. (2003)', pmid: '14620252', journal: 'Percept. Mot. Skills', desc: 'Estudio piloto con monjas franciscanas que repetían mentalmente una frase de oración: se observó mayor flujo sanguíneo en la corteza prefrontal. Muestra muy pequeña, por lo que es un hallazgo preliminar.' },
-            { type: 'faith', title: 'Estrés Sostenido y Envejecimiento Celular', author: 'Epel et al. (2004)', pmid: '15574496', journal: 'PNAS', desc: 'En un grupo de madres, quienes vivían con más estrés percibido tenían telómeros más cortos (un indicador de envejecimiento celular). Muestra por qué cuidar la calma importa, aunque no evaluó la fe.' },
-            { type: 'faith', title: 'Religión, Espiritualidad y Salud', author: 'Koenig (2012)', pmid: '23762764', journal: 'ISRN Psychiatry', desc: 'Revisión de investigaciones sobre religión, espiritualidad y salud física y mental. Reúne asociaciones; por sí sola no demuestra que la fe cause la mejoría.' }
+            { type: 'faith', title: 'La neurociencia ha encontrado a Dios en el cerebro de los creyentes', author: 'José Ramón Alonso Peña · Universidad de Salamanca (CIPER Chile / The Conversation, 2019)', url: 'https://www.ciperchile.cl/2019/09/17/la-neurociencia-ha-encontrado-a-dios-en-el-cerebro-de-los-creyentes/', desc: 'El neurobiólogo José Ramón Alonso revisa estudios de neuroimagen sobre la fe. Menciona una investigación con 20 cristianos devotos en la que, durante la oración, se activaron regiones del cerebro ligadas al sistema de recompensa y a la interacción social.' },
+            { type: 'faith', title: '¿Dios en el cerebro? La experiencia religiosa desde la neurociencia', author: 'José Manuel Giménez-Amaya · Universidad de Navarra (Scripta Theologica, 2010)', url: 'https://www.unav.edu/web/ciencia-razon-y-fe/-dios-en-el-cerebro-la-experiencia-religiosa-desde-la-neurociencia', desc: 'Conferencia que revisa estudios de resonancia magnética sobre la experiencia religiosa, como el de monjas carmelitas: durante estas experiencias se activan varias regiones del cerebro (perceptivas, cognitivas y emocionales) y no una sola zona.' },
+            { type: 'faith', title: 'Las experiencias religiosas activan los circuitos de recompensa del cerebro', author: 'Agencia SINC · estudio de la Universidad de Utah', url: 'https://www.agenciasinc.es/Noticias/Las-experiencias-religiosas-activan-los-circuitos-de-recompensa-del-cerebro', desc: 'Resume un estudio con resonancia magnética en 19 jóvenes creyentes: los sentimientos espirituales intensos se asociaron con la activación del núcleo accumbens (circuito de recompensa) y de la corteza prefrontal media.' }
         ];
 
         function openNightRoutine() {
@@ -659,6 +770,7 @@
         }
 
         function openModal(key) {
+            discardScriptRec();
             document.getElementById('modalBody').innerHTML = modalContent[key] || '<p class="text-base">Contenido en desarrollo...</p>';
             document.getElementById('contentModal').classList.remove('hidden');
 
@@ -672,9 +784,15 @@
                 document.getElementById('settingsStreakBadge').innerText = `Día ${currentStreak} de 90`;
                 document.getElementById('streakProgressBar').style.width = `${Math.min((currentStreak / 90) * 100, 100)}%`;
             }
+
+            if (key === 'journalModal') {
+                renderJournalList();
+            }
         }
 
         function closeModal() {
+            if (scriptBlob && !confirm('Tienes una grabación sin guardar. ¿Cerrar y descartarla?')) return;
+            discardScriptRec();
             document.getElementById('contentModal').classList.add('hidden');
         }
 
@@ -688,7 +806,14 @@
             if (filterType === 'scientific') {
                 badge.innerText = '8 Estudios Científicos';
             } else {
-                badge.innerText = '3 Estudios sobre Fe y Salud';
+                badge.innerText = '3 Lecturas en Español';
+            }
+
+            if (filterType !== 'scientific') {
+                const intro = document.createElement('p');
+                intro.className = 'text-sm text-slate-300 italic';
+                intro.textContent = 'Lecturas en español sobre la actividad cerebral durante la oración y la experiencia espiritual.';
+                list.appendChild(intro);
             }
 
             filtered.forEach(s => {
@@ -697,9 +822,9 @@
                 item.innerHTML = `
                     <div class="flex justify-between items-start gap-2">
                         <span class="font-bold text-white text-lg">${s.title}</span>
-                        <a href="https://pubmed.ncbi.nlm.nih.gov/${s.pmid}/" target="_blank" rel="noopener noreferrer" class="text-xs bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:text-gold-300 font-mono font-bold px-2.5 py-1 rounded-md flex items-center gap-1 transition shrink-0">
+                        ${s.url ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="text-xs bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:text-gold-300 font-bold px-2.5 py-1 rounded-md flex items-center gap-1 transition shrink-0">Leer artículo <i class="fa-solid fa-up-right-from-square text-[10px]"></i></a>` : `<a href="https://pubmed.ncbi.nlm.nih.gov/${s.pmid}/" target="_blank" rel="noopener noreferrer" class="text-xs bg-gold-500/10 border border-gold-500/30 text-gold-400 hover:text-gold-300 font-mono font-bold px-2.5 py-1 rounded-md flex items-center gap-1 transition shrink-0">
                             PMID ${s.pmid} <i class="fa-solid fa-up-right-from-square text-[10px]"></i>
-                        </a>
+                        </a>`}
                     </div>
                     <div class="text-sm text-slate-400 font-medium">${s.author}</div>
                     <p class="text-base text-slate-200 leading-relaxed mt-1">${s.desc}</p>
@@ -778,23 +903,97 @@
             closeModal();
         }
 
-        function exportJournalEntries() {
-            let journalContent = "=== MI DIARIO DE GRATITUD & RENOVACIÓN ===\n\n";
-            let found = false;
-
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('journal_')) {
-                    found = true;
-                    const date = key.replace('journal_', '');
-                    journalContent += `📅 FECHA: ${date}\n${localStorage.getItem(key)}\n----------------------------------------\n\n`;
+        function formatJournalDate(key) {
+            const raw = key.replace('journal_', '');
+            if (raw.length > 10) {
+                const d = new Date(raw);
+                if (!isNaN(d)) {
+                    return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
                 }
             }
+            const parts = raw.split('-').map(Number);
+            if (parts.length === 3 && parts[0] && parts[1] && parts[2]) {
+                return new Date(parts[0], parts[1] - 1, parts[2]).toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+            return raw;
+        }
 
-            if (!found) {
+        function getJournalKeys() {
+            const keys = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.startsWith('journal_')) keys.push(key);
+            }
+            return keys.sort().reverse();
+        }
+
+        function renderJournalList() {
+            const list = document.getElementById('journalList');
+            if (!list) return;
+            list.innerHTML = '';
+            const keys = getJournalKeys();
+            if (keys.length === 0) {
+                const empty = document.createElement('p');
+                empty.className = 'text-sm text-slate-400 italic';
+                empty.textContent = 'Todavía no tienes entradas guardadas.';
+                list.appendChild(empty);
+                return;
+            }
+            keys.forEach((key) => {
+                const card = document.createElement('div');
+                card.className = 'bg-navy-900/90 p-3.5 rounded-xl border border-slate-700/60 space-y-2';
+
+                const head = document.createElement('div');
+                head.className = 'flex justify-between items-center gap-2';
+                const date = document.createElement('span');
+                date.className = 'text-sm font-bold text-gold-400';
+                date.textContent = formatJournalDate(key);
+                const del = document.createElement('button');
+                del.className = 'text-xs text-rose-300 hover:text-rose-200 font-bold border border-rose-500/30 rounded px-2 py-1';
+                del.textContent = 'Borrar';
+                del.onclick = () => deleteJournalEntry(key);
+                head.appendChild(date);
+                head.appendChild(del);
+
+                const text = document.createElement('p');
+                text.className = 'text-base text-slate-200 leading-relaxed whitespace-pre-wrap';
+                text.textContent = localStorage.getItem(key);
+
+                card.appendChild(head);
+                card.appendChild(text);
+                list.appendChild(card);
+            });
+        }
+
+        function deleteJournalEntry(key) {
+            if (confirm('¿Borrar esta entrada del diario? Esta acción no se puede deshacer.')) {
+                localStorage.removeItem(key);
+                renderJournalList();
+            }
+        }
+
+        function clearJournal() {
+            const keys = getJournalKeys();
+            if (keys.length === 0) {
+                alert('No tienes entradas de diario guardadas.');
+                return;
+            }
+            if (confirm('¿Estás segura de que deseas borrar TODO tu diario? Esta acción no se puede deshacer.')) {
+                keys.forEach((k) => localStorage.removeItem(k));
+                alert('Diario borrado correctamente.');
+            }
+        }
+
+        function exportJournalEntries() {
+            const keys = getJournalKeys().reverse();
+            if (keys.length === 0) {
                 alert('No tienes entradas de diario guardadas aún.');
                 return;
             }
+            let journalContent = "=== MI DIARIO DE GRATITUD & RENOVACIÓN ===\n\n";
+            keys.forEach((key) => {
+                journalContent += `📅 FECHA: ${formatJournalDate(key)}\n${localStorage.getItem(key)}\n----------------------------------------\n\n`;
+            });
 
             const blob = new Blob([journalContent], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
@@ -900,15 +1099,56 @@
             audios.forEach(a => a.loop = enabled);
         }
 
+        let sleepDeadline = null;
+
+        function showToast(msg) {
+            const old = document.getElementById('appToast');
+            if (old) old.remove();
+            const t = document.createElement('div');
+            t.id = 'appToast';
+            t.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-navy-800 border border-gold-500/40 text-white text-sm px-4 py-3 rounded-xl shadow-lg z-50 text-center max-w-xs';
+            t.textContent = msg;
+            document.body.appendChild(t);
+            setTimeout(() => t.remove(), 6000);
+        }
+
+        function finishSleepTimer() {
+            sleepDeadline = null;
+            sleepTimerTimeout = null;
+            document.querySelectorAll('audio').forEach(a => a.pause());
+            const sel = document.getElementById('sleepTimer');
+            if (sel) sel.value = '0';
+            showToast('⏰ Temporizador completado. Que tengas un excelente descanso.');
+        }
+
         function setSleepTimer(minutes) {
             if (sleepTimerTimeout) clearTimeout(sleepTimerTimeout);
+            sleepTimerTimeout = null;
+            sleepDeadline = null;
             const mins = parseInt(minutes);
             if (mins > 0) {
-                sleepTimerTimeout = setTimeout(() => {
-                    const audios = document.querySelectorAll('audio');
-                    audios.forEach(a => a.pause());
-                    alert('⏰ Temporizador nocturno completado. Que tengas un excelente descanso.');
-                }, mins * 60 * 1000);
+                sleepDeadline = Date.now() + mins * 60 * 1000;
+                sleepTimerTimeout = setTimeout(finishSleepTimer, mins * 60 * 1000);
+            }
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (sleepDeadline && Date.now() >= sleepDeadline) finishSleepTimer();
+        });
+
+        function audioExtension(type) {
+            if (!type) return 'webm';
+            if (type.includes('mp4')) return 'm4a';
+            if (type.includes('ogg')) return 'ogg';
+            return 'webm';
+        }
+
+        function deleteAudio(id) {
+            if (confirm('¿Borrar este audio? Esta acción no se puede deshacer.')) {
+                const tx = db.transaction(["audios"], "readwrite");
+                tx.objectStore("audios").delete(id).onsuccess = function() {
+                    loadSavedAudios();
+                };
             }
         }
 
@@ -916,6 +1156,7 @@
             if (!db) return;
             const store = db.transaction(["audios"], "readonly").objectStore("audios");
             const list = document.getElementById('savedAudiosList');
+            if (!list) return;
             list.innerHTML = '';
 
             store.openCursor().onsuccess = function(e) {
@@ -923,16 +1164,45 @@
                 if (cursor) {
                     const item = cursor.value;
                     const url = URL.createObjectURL(item.blob);
-                    
+
                     const div = document.createElement('div');
                     div.className = "bg-navy-900/90 p-3.5 rounded-xl border border-slate-700/60 flex flex-col gap-2";
-                    div.innerHTML = `
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-white text-base">${item.title}</span>
-                            <span class="text-xs text-slate-400 font-mono">${item.date}</span>
-                        </div>
-                        <audio controls src="${url}" ${isLooping ? 'loop' : ''} class="w-full h-9 mt-1"></audio>
-                    `;
+
+                    const head = document.createElement('div');
+                    head.className = 'flex justify-between items-center gap-2';
+                    const title = document.createElement('span');
+                    title.className = 'font-bold text-white text-base';
+                    title.textContent = item.title;
+                    const date = document.createElement('span');
+                    date.className = 'text-xs text-slate-400 font-mono';
+                    date.textContent = item.date;
+                    head.appendChild(title);
+                    head.appendChild(date);
+
+                    const audio = document.createElement('audio');
+                    audio.controls = true;
+                    audio.src = url;
+                    audio.loop = isLooping;
+                    audio.className = 'w-full h-9 mt-1';
+
+                    const actions = document.createElement('div');
+                    actions.className = 'flex gap-2 text-xs';
+                    const dl = document.createElement('a');
+                    dl.href = url;
+                    const safe = (item.title || 'audio').replace(/[^\p{L}\p{N}\s_-]/gu, '').trim().replace(/\s+/g, '_') || 'audio';
+                    dl.download = safe + '.' + audioExtension(item.blob && item.blob.type);
+                    dl.className = 'text-gold-400 hover:text-gold-300 font-bold border border-gold-500/30 rounded px-2.5 py-1.5';
+                    dl.textContent = 'Descargar';
+                    const del = document.createElement('button');
+                    del.className = 'text-rose-300 hover:text-rose-200 font-bold border border-rose-500/30 rounded px-2.5 py-1.5';
+                    del.textContent = 'Borrar';
+                    del.onclick = () => deleteAudio(item.id);
+                    actions.appendChild(dl);
+                    actions.appendChild(del);
+
+                    div.appendChild(head);
+                    div.appendChild(audio);
+                    div.appendChild(actions);
                     list.appendChild(div);
                     cursor.continue();
                 } else if (list.children.length === 0) {
@@ -941,12 +1211,99 @@
             };
         }
 
+        // ---------- Grabadora dentro de los módulos (leer y grabar a la vez) ----------
+        let scriptRecorder = null;
+        let scriptChunks = [];
+        let scriptBlob = null;
+        let scriptStream = null;
+        let scriptRecording = false;
+
+        function releaseScriptStream() {
+            if (scriptStream) {
+                scriptStream.getTracks().forEach(t => t.stop());
+                scriptStream = null;
+            }
+        }
+
+        function discardScriptRec() {
+            if (scriptRecording && scriptRecorder) {
+                scriptRecorder.onstop = null;
+                try { scriptRecorder.stop(); } catch (e) {}
+            }
+            scriptRecording = false;
+            scriptRecorder = null;
+            scriptBlob = null;
+            scriptChunks = [];
+            releaseScriptStream();
+        }
+
+        async function toggleScriptRec() {
+            const btn = document.getElementById('scriptRecBtn');
+            if (!btn) return;
+            if (!scriptRecording) {
+                try {
+                    scriptStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    scriptRecorder = new MediaRecorder(scriptStream);
+                    scriptChunks = [];
+                    scriptBlob = null;
+                    document.getElementById('scriptRecPlayback').classList.add('hidden');
+                    document.getElementById('scriptRecSaveBox').classList.add('hidden');
+                    document.getElementById('scriptRecDone').classList.add('hidden');
+                    scriptRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) scriptChunks.push(e.data); };
+                    scriptRecorder.onstop = () => {
+                        scriptBlob = new Blob(scriptChunks, { type: (scriptRecorder && scriptRecorder.mimeType) || 'audio/webm' });
+                        const pb = document.getElementById('scriptRecPlayback');
+                        if (pb) { pb.src = URL.createObjectURL(scriptBlob); pb.classList.remove('hidden'); }
+                        const box = document.getElementById('scriptRecSaveBox');
+                        if (box) box.classList.remove('hidden');
+                        releaseScriptStream();
+                    };
+                    scriptRecorder.start();
+                    scriptRecording = true;
+                    btn.innerHTML = '<i class="fa-solid fa-stop"></i> <span>Detener grabación</span>';
+                    document.getElementById('scriptRecHint').textContent = '🔴 Grabando… lee el guión en voz alta.';
+                } catch (err) {
+                    alert('No se pudo usar el micrófono. Revisa que hayas dado permiso al navegador.');
+                }
+            } else {
+                scriptRecording = false;
+                try { scriptRecorder.stop(); } catch (e) {}
+                btn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> <span>Grabar de nuevo</span>';
+                document.getElementById('scriptRecHint').textContent = 'Escucha tu grabación y guárdala si te gusta.';
+            }
+        }
+
+        function saveScriptRec() {
+            if (!scriptBlob || !db) return;
+            const bar = document.getElementById('scriptRecBar');
+            const base = (bar && bar.dataset.title) || 'Audio Nocturno';
+            const typed = document.getElementById('scriptRecTitle').value.trim();
+            const title = typed || (base + ' - ' + new Date().toLocaleDateString());
+            const record = {
+                title: title,
+                blob: scriptBlob,
+                date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+            db.transaction(["audios"], "readwrite").objectStore("audios").add(record).onsuccess = function() {
+                scriptBlob = null;
+                document.getElementById('scriptRecSaveBox').classList.add('hidden');
+                document.getElementById('scriptRecPlayback').classList.add('hidden');
+                document.getElementById('scriptRecTitle').value = '';
+                document.getElementById('scriptRecDone').classList.remove('hidden');
+                document.getElementById('scriptRecBtn').innerHTML = '<i class="fa-solid fa-microphone"></i> <span>Grabar otro</span>';
+                loadSavedAudios();
+            };
+        }
+
         function saveJournal() {
-            const text = document.getElementById('journalText').value;
+            const field = document.getElementById('journalText');
+            const text = field.value;
             if (text.trim()) {
-                localStorage.setItem('journal_' + new Date().toISOString().split('T')[0], text);
+                localStorage.setItem('journal_' + new Date().toISOString(), text);
+                field.value = '';
                 document.getElementById('saveConfirm').classList.remove('hidden');
-                setTimeout(() => document.getElementById('saveConfirm').classList.add('hidden'), 3000);
+                setTimeout(() => { const c = document.getElementById('saveConfirm'); if (c) c.classList.add('hidden'); }, 3000);
+                renderJournalList();
             }
         }
 
@@ -958,4 +1315,3 @@
     </script>
 </body>
 </html>
-

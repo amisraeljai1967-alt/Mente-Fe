@@ -57,6 +57,7 @@
         const SUPPORT_EMAIL = 'Lgarza67@hotmail.com';   // correo para activar accesos pagados
         const SUPPORT_WHATSAPP = '528182527041';        // WhatsApp (con lada de país) para avisar un pago
         const OWNER_EMAILS = ['Lgarza67@hotmail.com'];  // correos de la creadora: siempre tienen acceso total (sin prueba ni pago)
+        const OWNER_CODE_HASH = 'c19ad87b37804637525bd60b4af05bfc4c6564e04180703c790ec95b5c220756'; // huella del código secreto de la creadora (el código NO está en la app)
         const DAY_MS = 24 * 60 * 60 * 1000;
         let accountState = null;    // { email, paid, trialStartMs }
         let authResolved = false;   // true cuando Firebase ya respondió
@@ -241,7 +242,40 @@
             }
         }
 
+        // ---- Acceso de creadora por enlace secreto (sin Google) ----
+        function ownerLocal() { try { return localStorage.getItem('mf_owner') === OWNER_CODE_HASH; } catch (e) { return false; } }
+        function ownerState() { return { email: 'Creadora', owner: true, paid: true, paidUntilMs: 0, trialStartMs: Date.now() }; }
+        async function sha256Hex(t) {
+            const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(t));
+            return Array.from(new Uint8Array(b)).map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+        function activateOwner() {
+            applyAccount(ownerState());
+        }
+        async function tryOwnerCode(code) {
+            try {
+                if (code && (await sha256Hex(code.trim())) === OWNER_CODE_HASH) {
+                    localStorage.setItem('mf_owner', OWNER_CODE_HASH);
+                    activateOwner();
+                    return true;
+                }
+            } catch (e) {}
+            return false;
+        }
+        (function ownerBoot() {
+            let c = null;
+            try { c = new URLSearchParams(location.search).get('owner'); } catch (e) {}
+            if (!c) return;
+            try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+            const go = async () => {
+                if (c === 'off') { try { localStorage.removeItem('mf_owner'); localStorage.removeItem('mf_access'); } catch (e) {} location.reload(); return; }
+                await tryOwnerCode(c);
+            };
+            if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+        })();
+
         function applyAccount(st) {
+            if (ownerLocal()) st = ownerState();
             accountState = st;
             authResolved = true;
             try { localStorage.setItem('mf_access', JSON.stringify(st)); } catch (e) {}
@@ -257,6 +291,7 @@
         }
 
         function noUser() {
+            if (ownerLocal()) { applyAccount(ownerState()); return; }
             accountState = null;
             authResolved = true;
             updateTrialBanner();
@@ -269,6 +304,7 @@
             let cache = null;
             try { cache = JSON.parse(localStorage.getItem('mf_access') || 'null'); } catch (e) {}
             authResolved = true;
+            if (ownerLocal()) { applyAccount(ownerState()); return; }
             if (hasAccess(cache)) {
                 accountState = cache;
                 updateTrialBanner();
@@ -1751,4 +1787,3 @@
 
 </body>
 </html>
-
